@@ -16,5 +16,10 @@ public class menuinicial : MonoBehaviour
         Application.Quit();
     }
 
+    public void BACK()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
 
 }
