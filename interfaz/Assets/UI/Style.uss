@@ -1,0 +1,421 @@
+VisualElement {
+}
+
+.contenedor {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(244, 244, 244);
+    border-bottom-color: rgb(217, 217, 217);
+    border-bottom-width: 1px;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+
+.contenido {
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-left-color: rgba(244, 244, 244, 0);
+    border-right-color: rgba(244, 244, 244, 0);
+    border-top-color: rgba(244, 244, 244, 0);
+    border-bottom-color: rgba(244, 244, 244, 0);
+    background-color: rgb(244, 244, 244);
+}
+
+.menu {
+    height: 100%;
+    position: relative;
+    background-color: rgb(244, 244, 244);
+    width: 110px;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.seccion {
+    flex-grow: 1;
+    background-color: rgba(248, 160, 160, 0);
+    height: 100%;
+    width: 100%;
+    padding-right: 0;
+}
+
+.ac_usu {
+    width: 97%;
+    height: 30px;
+    background-color: rgb(244, 244, 244);
+    position: relative;
+    border-left-color: rgb(217, 217, 217);
+    border-right-color: rgb(217, 217, 217);
+    border-top-color: rgb(217, 217, 217);
+    border-bottom-color: rgb(217, 217, 217);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 1px;
+}
+
+.logo {
+    width: 110px;
+    background-color: rgb(244, 244, 244);
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+    background-image: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_logo {
+    background-image: url('project://database/Assets/Sprites/JoyBox.png?fileID=21300000&guid=75f079c3cfbbb414d8153b8ee00677af&type=3#JoyBox');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    width: 80px;
+    height: 40%;
+}
+
+.perfil {
+    width: 50px;
+    height: 100%;
+    background-color: rgb(244, 244, 244);
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil_icono {
+    width: 23px;
+    height: 23px;
+    background-color: rgb(238, 238, 238);
+    background-image: url('project://database/Assets/Sprites/icono_usuario.png?fileID=21300000&guid=f10a4c97a75be434cb2ebe95a7d10763&type=3#icono_usuario');
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    -unity-background-image-tint-color: rgba(244, 244, 244, 0.11);
+}
+
+.botones {
+    width: 100%;
+    height: 40%;
+    background-color: rgb(244, 244, 244);
+    align-items: center;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.boton_menu {
+    width: 92%;
+    height: 16px;
+    background-color: rgb(244, 244, 244);
+    margin-top: 4px;
+    margin-bottom: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+    border-left-color: rgba(244, 244, 244, 0);
+    border-right-color: rgba(244, 244, 244, 0);
+    border-top-color: rgba(244, 244, 244, 0);
+    border-bottom-color: rgba(244, 244, 244, 0);
+}
+
+.boton_config {
+    width: 92%;
+    height: 16px;
+}
+
+.configuracion {
+    align-items: center;
+    width: 100%;
+    align-self: center;
+}
+
+.icono_boton {
+    width: 10px;
+    height: 11px;
+    flex-grow: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: rgb(244, 244, 244);
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    margin-left: 0;
+    background-image: none;
+    position: absolute;
+    align-self: auto;
+    border-left-color: rgba(244, 244, 244, 0);
+    border-right-color: rgba(244, 244, 244, 0);
+    border-top-color: rgba(244, 244, 244, 0);
+    border-bottom-color: rgba(244, 244, 244, 0);
+}
+
+.boton_text {
+    width: 75px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: auto;
+}
+
+.icono_inicio {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_home.png?fileID=21300000&guid=ad27cb3ef288c8849b59a128c81bc24e&type=3#icono_home');
+    width: 100%;
+    height: 75%;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.unity-text-element {
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgb(165, 166, 165);
+    -unity-text-align: middle-left;
+    font-size: 8px;
+    -unity-font-style: normal;
+    background-color: rgba(244, 244, 244, 0);
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+    border-left-color: rgba(244, 244, 244, 0);
+    border-right-color: rgba(244, 244, 244, 0);
+    border-top-color: rgba(244, 244, 244, 0);
+    border-bottom-color: rgba(244, 244, 244, 0);
+}
+
+.unity-button {
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-left-color: rgb(244, 244, 244);
+    border-right-color: rgb(244, 244, 244);
+    border-top-color: rgb(244, 244, 244);
+    border-bottom-color: rgb(244, 244, 244);
+    background-color: rgba(244, 244, 244, 0);
+}
+
+.icono_juegos {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_JoyBox.png?fileID=21300000&guid=59f0e5ab1cb692d43896a1a5d111b33d&type=3#icono_JoyBox');
+    width: 10px;
+    height: 10px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.icono_social {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_social.png?fileID=21300000&guid=e528fb5cf938cdd439aaff1a64757882&type=3#icono_social');
+    width: 10px;
+    height: 8px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.icono_not {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_notificacion.png?fileID=21300000&guid=390486ac4d1dde44b8bff73521c748cb&type=3#icono_notificacion');
+    width: 10px;
+    height: 10px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.icono_con {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_com.png?fileID=21300000&guid=a398f9892745bba4aa9fecd9c4b427b3&type=3#icono_com');
+    width: 11px;
+    height: 8px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.boton_config {
+    margin-bottom: 4px;
+}
+
+.icono_config {
+    background-color: rgb(244, 244, 244);
+    background-image: url('project://database/Assets/Sprites/iconos_menu/icono_config.png?fileID=21300000&guid=5bd82d66d1436614182f645b2c9d08d9&type=3#icono_config');
+    width: 10px;
+    height: 10px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-image-tint-color: rgb(244, 244, 244);
+}
+
+.unity-scroll-view {
+    width: 100%;
+    height: 100%;
+}
+
+.juegos_recientes {
+    width: 100%;
+    height: 90px;
+}
+
+.juegos_text {
+    color: rgb(248, 108, 128);
+    -unity-font-style: bold;
+    font-size: 13px;
+}
+
+.c_juegos_r {
+    justify-content: center;
+    align-items: stretch;
+    align-self: auto;
+}
+
+.slider_juegos_r {
+}
+
+.con_comunidades {
+    width: 100%;
+    height: 111px;
+}
+
+.comunidad {
+    flex-direction: row;
+    background-color: rgb(56, 56, 56);
+    width: 100%;
+    height: 35px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.foto_comunidad {
+    width: 28px;
+    height: 28px;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: rgb(166, 166, 166);
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.con_grupos {
+    width: 100%;
+    height: 111px;
+}
+
+.grupos {
+    flex-direction: row;
+    background-color: rgb(56, 56, 56);
+    width: 100%;
+    height: 35px;
+    align-items: center;
+    margin-bottom: 5px;
+    align-self: auto;
+}
+
+.text_info {
+}
+
+.nombre {
+}
+
+.mensajes {
+}
+
+.info_mensaje {
+    flex-direction: row;
+    align-self: auto;
+    align-items: center;
+    height: auto;
+}
+
+.con_chats {
+    width: 100%;
+    height: 111px;
+    margin-bottom: 10px;
+}
+
+.seccion_margen {
+    padding-right: 20px;
+}
+
+.unity-scroller {
+}
+
+.unity-scroller--vertical {
+}
+
+.unity-scroll-view__vertical-scroller {
+}
+
+.unity-text-element {
+}
+
+.unity-repeat-button {
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.unity-scroller__high-button {
+}
+
+.unity-scroller__low-button {
+}

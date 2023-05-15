@@ -1,0 +1,118 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style.uss?fileID=7433441132597879392&amp;guid=234f048406c0b87408514fa7ea698956&amp;type=3#Style" />
+    <ui:VisualElement name="contenedor" class="contenedor">
+        <ui:VisualElement name="header" class="header" style="flex-direction: row;">
+            <ui:VisualElement name="logo" class="logo">
+                <ui:VisualElement name="imgLogo" class="img_logo" />
+            </ui:VisualElement>
+            <ui:VisualElement name="perfil" class="perfil">
+                <ui:VisualElement name="perfil_icono" class="perfil_icono" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="contenido" class="contenido">
+            <ui:VisualElement name="menu" class="menu">
+                <ui:VisualElement name="botones" class="botones">
+                    <ui:Button text="       Inicio" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_menu" class="boton_menu" style="justify-content: center; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="icono_contenedor" class="icono_boton" style="background-image: url(&apos;project://database/Packages/com.unity.2d.animation/Editor/Assets/ComponentIcons/Animation.IKCCD%20On.png?fileID=2800000&amp;guid=40ca859210cd04b62bbfe0e0d5696d3b&amp;type=3#Animation.IKCCD On&apos;); justify-content: center; align-self: auto; flex-direction: column; align-items: center; top: 4px; left: 9px;">
+                            <ui:VisualElement name="icono_inicio" class="icono_inicio" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                    <ui:Button text="       Juegos" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_menu" class="boton_menu" style="justify-content: center; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="icono_contenedor" class="icono_boton" style="top: 4px; left: 9px;">
+                            <ui:VisualElement name="icono_juegos" class="icono_juegos" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                    <ui:Button text="       Social" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_menu" class="boton_menu" style="justify-content: center; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="icono_contenedor" class="icono_boton" style="top: 4px; left: 9px;">
+                            <ui:VisualElement name="icono_social" class="icono_social" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                    <ui:Button text="       Notificaciones" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_menu" class="boton_menu" style="justify-content: center; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="icono_contenedor" class="icono_boton" style="top: 5px; left: 9px;">
+                            <ui:VisualElement name="icono_not" class="icono_not" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                    <ui:Button text="       Comunidades" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_menu" class="boton_menu" style="justify-content: center; -unity-text-align: middle-left;">
+                        <ui:VisualElement name="icono_contenedor" class="icono_boton" style="top: 4px; left: 9px;">
+                            <ui:VisualElement name="icono_com" class="icono_con" />
+                        </ui:VisualElement>
+                    </ui:Button>
+                </ui:VisualElement>
+                <ui:VisualElement name="configuracion" class="configuracion" style="flex-direction: row-reverse; align-self: center; justify-content: flex-start; align-items: center;">
+                    <ui:Button text="     Configuración" display-tooltip-when-elided="true" enable-rich-text="false" name="boton_config" class="boton_menu boton_config" style="justify-content: center; -unity-text-align: middle-left;" />
+                    <ui:VisualElement name="icono_contenedor" class="icono_boton" style="top: 9px; left: 14px;">
+                        <ui:VisualElement name="icono_inicio" class="icono_config" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="seccion" class="seccion">
+                <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1">
+                    <ui:VisualElement name="seccion_margen" class="seccion_margen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                        <ui:VisualElement name="ac_usu" class="ac_usu" />
+                        <ui:VisualElement name="juegos_recientes" class="juegos_recientes" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                            <ui:Label tabindex="-1" text="Juegos recientes" display-tooltip-when-elided="true" class="juegos_text" />
+                            <ui:VisualElement name="c_juegos_r" class="c_juegos_r" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                                <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="slider_juegos_r" class="slider_juegos_r" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="con_comunidades" class="con_comunidades" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                            <ui:Label tabindex="-1" text="Comunidades" display-tooltip-when-elided="true" class="juegos_text" />
+                            <ui:VisualElement name="comunidad" class="comunidad" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:Label tabindex="-1" text="Equipo patiti" display-tooltip-when-elided="true" style="color: rgb(0, 0, 0); width: auto; -unity-font-style: normal;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="comunidad" class="comunidad" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:Label tabindex="-1" text="Generación del 37" display-tooltip-when-elided="true" style="color: rgb(0, 0, 0); -unity-font-style: normal;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="con_grupos" class="con_grupos" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                            <ui:Label tabindex="-1" text="Grupos" display-tooltip-when-elided="true" class="juegos_text" />
+                            <ui:VisualElement name="grupos" class="grupos" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:VisualElement name="text_info" class="text_info" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                                    <ui:Label tabindex="-1" text="Federales &gt;//&lt;" display-tooltip-when-elided="true" enable-rich-text="false" class="nombre" style="height: 1px; color: rgb(0, 0, 0);" />
+                                    <ui:VisualElement name="info_mensaje" class="info_mensaje" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto; width: auto;">
+                                        <ui:Label tabindex="-1" text="Juan Manuel De Rosas:" display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgb(0, 0, 0); margin-right: 2px;" />
+                                        <ui:Label tabindex="-1" text="Hola hola hola hola hola hola hola hola hola hola" display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgba(0, 0, 0, 0.63); margin-left: 0; -unity-font-style: normal;" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="grupos" class="grupos" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:VisualElement name="text_info" class="text_info" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                                    <ui:Label tabindex="-1" text="Unitarios &gt;:V" display-tooltip-when-elided="true" enable-rich-text="false" class="nombre" style="height: 1px; color: rgb(0, 0, 0);" />
+                                    <ui:VisualElement name="info_mensaje" class="info_mensaje" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto; width: auto;">
+                                        <ui:Label tabindex="-1" text="Alberdi:" display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgb(0, 0, 0); margin-right: 2px;" />
+                                        <ui:Label tabindex="-1" text="Federales no." display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgba(0, 0, 0, 0.63); margin-left: 0; -unity-font-style: normal;" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="con_chats" class="con_chats" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                            <ui:Label tabindex="-1" text="Chats" display-tooltip-when-elided="true" class="juegos_text" />
+                            <ui:VisualElement name="grupos" class="grupos" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:VisualElement name="text_info" class="text_info" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                                    <ui:Label tabindex="-1" text="Nombre" display-tooltip-when-elided="true" enable-rich-text="false" class="nombre" style="height: 1px; color: rgb(0, 0, 0);" />
+                                    <ui:VisualElement name="info_mensaje" class="info_mensaje" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto; width: auto;">
+                                        <ui:Label tabindex="-1" text="Hola hola hola hola hola hola hola hola hola hola" display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgba(0, 0, 0, 0.63); margin-left: 2px; -unity-font-style: normal;" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="grupos" class="grupos" style="flex-grow: 0; background-color: rgb(236, 236, 236);">
+                                <ui:VisualElement name="foto_comunidad" class="foto_comunidad" style="flex-grow: 0; background-color: rgb(217, 217, 217);" />
+                                <ui:VisualElement name="text_info" class="text_info" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+                                    <ui:Label tabindex="-1" text="Nombre" display-tooltip-when-elided="true" enable-rich-text="false" class="nombre" style="height: 1px; color: rgb(0, 0, 0);" />
+                                    <ui:VisualElement name="info_mensaje" class="info_mensaje" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto; width: auto;">
+                                        <ui:Label tabindex="-1" text="Hola hola hola hola hola hola hola hola hola hola" display-tooltip-when-elided="true" class="mensajes" style="height: 1px; font-size: 6px; color: rgba(0, 0, 0, 0.63); margin-left: 2px; -unity-font-style: normal;" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
