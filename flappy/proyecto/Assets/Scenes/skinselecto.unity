@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 90275638}
   - component: {fileID: 90275637}
   - component: {fileID: 90275636}
+  - component: {fileID: 90275640}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -229,6 +230,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &90275640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90275635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8d19667ba5e0a47b21f404ef3e57b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &376971606
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,9 +326,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 90275640}
         m_TargetAssemblyTypeName: menuinicial, Assembly-CSharp
-        m_MethodName: PLAY
+        m_MethodName: BACK
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1055,7 +1068,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 90275640}
         m_TargetAssemblyTypeName: menuinicial, Assembly-CSharp
         m_MethodName: PLAY
         m_Mode: 1
@@ -1424,7 +1437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterDB: {fileID: 11400000, guid: 0fc62a703a6a3a34bb0b6ac802a30045, type: 2}
-  nameText: {fileID: 0}
   artworkSprite: {fileID: 1851925980}
 --- !u!1 &1893248543
 GameObject:
