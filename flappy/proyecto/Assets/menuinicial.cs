@@ -7,6 +7,11 @@ public class menuinicial : MonoBehaviour
 {
     public void PLAY()
     {
+        SceneManager.LoadScene("main");
+    }
+
+    public void OPCIONES()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -20,6 +25,5 @@ public class menuinicial : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
-
 
 }

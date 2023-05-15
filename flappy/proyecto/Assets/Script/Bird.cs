@@ -9,16 +9,18 @@ public class Bird : MonoBehaviour
     private Animator anim;
     public float upForce = 200f;
     private RotateBird rotateBird;
-    
+    //skin
+    public CharacterDatabase characterDB;
+    public SpriteRenderer artworkSprite;
+    private int selectedOption = 0;
+
+
     private void Awake(){
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rotateBird = GetComponent<RotateBird>();
     }
 
-    private void Start(){
-        
-    }
     // Update is called once per frame
     private void Update()
     {
@@ -38,5 +40,30 @@ public class Bird : MonoBehaviour
         rb2d.velocity = Vector2.zero;
         SoundSystem.instance.PlayHit();
         SoundSystem.instance.audioBackground.Stop();
+    }
+
+    //skin
+    private void UpdateCharacter(int selectedOption)
+    {
+    Character character = characterDB.GetCharacter(selectedOption);
+    artworkSprite.sprite = character.characterSprite;
+    }
+
+    private void load()
+    {   
+    selectedOption = PlayerPrefs.GetInt("selectedOption");
+    }
+
+    void Start()
+    {
+    if(PlayerPrefs.HasKey("selectedOption"))
+    {
+        selectedOption = 0;
+    }
+    else
+    {
+        load();
+    }
+    UpdateCharacter(selectedOption);
     }
 }
