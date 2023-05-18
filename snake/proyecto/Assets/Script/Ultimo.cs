@@ -26,11 +26,23 @@ public class Ultimo : MonoBehaviour
         
     }
     public void Crearparte(){
-        //Instantiate(parte,new Vector2(transform.position.x + MoverSnake.instancia.puntos * 80.3f * (1f / Screen.dpi),transform.position.y));
+        Instantiate(parte,new Vector2(transform.position.x,transform.position.y),Quaternion.Euler(0,0,transform.rotation.eulerAngles.z));
+        if(transform.rotation.eulerAngles.z == 0f){
+            transform.position = new Vector2(transform.position.x-80.3f * (1f / Screen.dpi),transform.position.y);
+        }
+        else if(transform.rotation.eulerAngles.z == 180f){
+            transform.position = new Vector2(transform.position.x+80.3f * (1f / Screen.dpi),transform.position.y);
+        }
+        else if(transform.rotation.eulerAngles.z == 270f){
+            transform.position = new Vector2(transform.position.x,transform.position.y+80.3f * (1f / Screen.dpi));
+        }
+        else{
+            transform.position = new Vector2(transform.position.x,transform.position.y-80.3f * (1f / Screen.dpi));
+        }
     }
     public void OnDestroy(){
         if(MoverSnake.instancia == this){
-            MoverSnake.instancia = null;    
+            MoverSnake.instancia = null;
         }
     }
 }
