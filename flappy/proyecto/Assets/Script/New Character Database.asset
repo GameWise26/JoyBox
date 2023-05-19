@@ -13,11 +13,6 @@ MonoBehaviour:
   m_Name: New Character Database
   m_EditorClassIdentifier: 
   character:
-  - characterName: Amarillo
-    characterSprite: {fileID: 30594416, guid: 1581eac27b355174a9e978f1387ff106, type: 3}
-  - characterName: Azul
-    characterSprite: {fileID: 30594416, guid: 4bfbec09b4ca36948a2ef9b3106ec06b, type: 3}
-  - characterName: Rojo
-    characterSprite: {fileID: 30594416, guid: 6d01f5f4fb5ae1146bcd17c4d756a209, type: 3}
-  - characterName: Verde
-    characterSprite: {fileID: 30594416, guid: 660edb8fc2548dc47ab592121ecd6d6d, type: 3}
+  - characterSprite: {fileID: 30594416, guid: 1581eac27b355174a9e978f1387ff106, type: 3}
+  - characterSprite: {fileID: 30594416, guid: 4bfbec09b4ca36948a2ef9b3106ec06b, type: 3}
+  - characterSprite: {fileID: 30594416, guid: 6d01f5f4fb5ae1146bcd17c4d756a209, type: 3}

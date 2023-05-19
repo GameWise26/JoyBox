@@ -50,6 +50,7 @@ public class CharacterManagement : MonoBehaviour
 
     private void UpdateCharacter(int selectedOption)
     {
+        Debug.Log(selectedOption);
         Character character = characterDB.GetCharacter(selectedOption);
         artworkSprite.sprite = character.characterSprite;
     }
