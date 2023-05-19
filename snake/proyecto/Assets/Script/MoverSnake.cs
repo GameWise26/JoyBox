@@ -32,7 +32,7 @@ public class MoverSnake : MonoBehaviour
         angle = 0f;
         ant = 0f;
         puntos = 0;
-        tiempo2 = 25;
+        tiempo2 = 50;
         volver = 50;
     }
 
@@ -84,7 +84,7 @@ public class MoverSnake : MonoBehaviour
         tiempo2--;
         if(tiempo2 == 0){
             transform.Translate(vector);
-            tiempo2 = 25;
+            tiempo2 = 50;
         }
         tiempo--;
     }

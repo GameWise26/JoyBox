@@ -17,7 +17,7 @@ public class MOverCuerpo : MonoBehaviour
         y = 0;
         actual = 0f;
         vector = new Vector2(x,y);
-        tiempo2 = 25;
+        tiempo2 = 50;
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class MOverCuerpo : MonoBehaviour
         tiempo2--;
         if(tiempo2 == 0){
             transform.Translate(vector);
-            tiempo2 = 25;
+            tiempo2 = 50;
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)

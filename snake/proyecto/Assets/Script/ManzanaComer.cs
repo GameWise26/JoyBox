@@ -20,9 +20,11 @@ public class ManzanaComer : MonoBehaviour
     private void OnTriggerEnter2D (Collider2D collider){
         if(collider.CompareTag("Player"))
         {
+            collider.enabled = false;
             MoverSnake.instancia.puntos++;
             MoverSnake.instancia.texto.text = "Score: "+MoverSnake.instancia.puntos;
             Ultimo.instancia.Crearparte();
+            collider.enabled = true;
             Instantiate(prefab,new Vector2(-0.025f+(80.3f * (1f / Screen.dpi)*Random.Range(-10,10)),0.375f+(80.3f * (1f / Screen.dpi)*Random.Range(-6,4))),Quaternion.identity);
             Destroy(gameObject);
         }

@@ -26,8 +26,9 @@ public class AparecerDoblado : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.CompareTag("parte"))
+        if(collider.CompareTag("parte") || collider.CompareTag("cola"))
         {
+            Debug.Log(collider.CompareTag("cola"));
             contador--;
         }
     }

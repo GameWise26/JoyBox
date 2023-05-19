@@ -6,6 +6,7 @@ TagManager:
   tags:
   - rotadp
   - parte
+  - cola
   layers:
   - Default
   - TransparentFX
