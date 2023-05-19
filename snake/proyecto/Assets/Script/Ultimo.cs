@@ -6,6 +6,11 @@ public class Ultimo : MonoBehaviour
 {
     public static Ultimo instancia;
     public GameObject parte;
+    private float x, y, actual;
+    private Rigidbody2D rb2d;
+    private Vector2 vector;
+    public Rigidbody2D crb2d;
+
     private void Awake(){
         if(Ultimo.instancia == null){
             Ultimo.instancia = this;    
@@ -17,13 +22,22 @@ public class Ultimo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
+        x = 80.3f * (1f / Screen.dpi);
+        y = 0;
+        actual = 0f;
+        vector = new Vector2(x,y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(MoverSnake.instancia.angle != actual){
+            actual = MoverSnake.instancia.angle;
+        }
+        if(MoverSnake.instancia.tiempo2 == 0){
+            transform.Translate(vector);
+        }
     }
     public void Crearparte(){
         float x = transform.position.x;

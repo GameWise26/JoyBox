@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AparecerDoblado : MonoBehaviour
 {
-    private int puntos,contador;
+    public int puntos,contador;
     public float angle;
     // Start is called before the first frame update
     void Start()
@@ -26,10 +26,15 @@ public class AparecerDoblado : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.CompareTag("parte") || collider.CompareTag("cola"))
+        if(collider.CompareTag("parte"))
         {
-            Debug.Log(collider.CompareTag("cola"));
             contador--;
+            collider.gameObject.transform.rotation = Quaternion.Euler(0,0,angle);
+        }
+        else if(collider.CompareTag("cola")){
+            if(collider.gameObject.transform.position.x < transform.position.x - 0.1f || collider.gameObject.transform.position.x > transform.position.x + 0.1f || collider.gameObject.transform.position.y < transform.position.y -0.1f || collider.gameObject.transform.position.y > transform.position.y + 0.1f) return;
+            contador--;
+            collider.gameObject.transform.rotation = Quaternion.Euler(0,0,angle);
         }
     }
 }
