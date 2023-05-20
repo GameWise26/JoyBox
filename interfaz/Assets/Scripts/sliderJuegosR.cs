@@ -20,26 +20,23 @@ public class conte : MonoBehaviour
 
     private void ScrollLeft()
     {
-        if (targetPosition.x <= 455.881f)
-        {
-            targetPosition += new Vector2(scrollSpeed, 0f);
-        }
+        targetPosition += new Vector2(scrollSpeed, 0f);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -455.8845f, 455.881f);
     }
 
     private void ScrollRight()
     {
-        if (targetPosition.x >= -455.8845f)
-        {
-            targetPosition -= new Vector2(scrollSpeed, 0f);
-        }
-
+        targetPosition -= new Vector2(scrollSpeed, 0f);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -455.8845f, 455.881f);
     }
 
     private void Update()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         targetPosition += new Vector2(-scroll * scrollSpeed, 0f);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -455.8845f, 455.881f);
 
         content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, targetPosition, Time.deltaTime * 5f);
     }
+
 }
