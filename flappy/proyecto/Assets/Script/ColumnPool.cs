@@ -26,12 +26,13 @@ public class ColumnPool : MonoBehaviour
         for(int i = 0; i < columnPoolSize; i++){
             columns[i] = Instantiate(columnPrefab,objectPoolPosition,Quaternion.identity);
         }
-        SpawnColumn();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Bird.instance.rb2d.IsAwake()) return;
         timeSinceLastSpawned += Time.deltaTime;
         if(!GameController.instance.gameOver && timeSinceLastSpawned >= spawnRate){
             timeSinceLastSpawned = 0;
