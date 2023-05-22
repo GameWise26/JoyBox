@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    private bool isDead = false;
+    private bool isDead = false, listo = false;
     private Rigidbody2D rb2d;
     private Animator anim;
     public float upForce = 200f;
     private RotateBird rotateBird;
+    public static Bird instance;
     //skin
     public CharacterDatabase characterDB;
     public SpriteRenderer artworkSprite;
@@ -24,11 +25,21 @@ public class Bird : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rotateBird = GetComponent<RotateBird>();
+        if (Bird.instance == null)
+        {
+            Bird.instance = this;
+        }
+        else if (Bird.instance != this)
+        {
+            Destroy(gameObject);
+            Debug.LogWarning("Bird ha sido instanciado por segunda vez. Esto no deber�a ocurrir.");
+        }
     }
 
     // Update is called once per frame
     private void Update()
     {
+        listo = true;
         if (isDead) return;
         if (Input.GetMouseButtonDown(0) && transform.position.y < 5)
         {
@@ -40,6 +51,7 @@ public class Bird : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        listo = false;
         isDead = true;
         anim.SetTrigger("Die");
         rotateBird.enabled = false;
@@ -64,15 +76,15 @@ public class Bird : MonoBehaviour
         }
         if (selectedOption == 1)
         {
-                  anim.runtimeAnimatorController = nuevoControlador1;
+            anim.runtimeAnimatorController = nuevoControlador1;
         }
         else if (selectedOption == 2)
         {
-             anim.runtimeAnimatorController = nuevoControlador2;
+            anim.runtimeAnimatorController = nuevoControlador2;
         }
         else
         {
-           anim.runtimeAnimatorController = nuevoControlador0;
+            anim.runtimeAnimatorController = nuevoControlador0;
         }
     }
 }

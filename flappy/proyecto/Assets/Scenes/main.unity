@@ -869,7 +869,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!70 &928782858
@@ -900,6 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4898d7d2cae7a7f4c9139b07552abc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
   upForce: 200
   characterDB: {fileID: 11400000, guid: 0fc62a703a6a3a34bb0b6ac802a30045, type: 2}
   artworkSprite: {fileID: 928782855}
