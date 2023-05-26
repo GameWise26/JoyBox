@@ -288,7 +288,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.58913
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 750404164}
   - component: {fileID: 750404163}
   - component: {fileID: 750404162}
+  - component: {fileID: 750404166}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -639,7 +640,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -665,6 +666,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &750404166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750404161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8d19667ba5e0a47b21f404ef3e57b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &857781408
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,8 +703,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857781408}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.77, y: 2.62, z: 0}
+  m_LocalScale: {x: 1.4607, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 659529929}
@@ -831,7 +844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928782854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.29, y: 0, z: 0}
+  m_LocalPosition: {x: -1.278, y: -0.017, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -856,7 +869,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!70 &928782858
@@ -873,7 +886,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.09, y: 0}
-  m_Size: {x: 0.95, y: 0.62}
+  m_Size: {x: 0.88, y: 0.72}
   m_Direction: 1
 --- !u!114 &928782859
 MonoBehaviour:
@@ -887,7 +900,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4898d7d2cae7a7f4c9139b07552abc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
   upForce: 200
+  characterDB: {fileID: 11400000, guid: 0fc62a703a6a3a34bb0b6ac802a30045, type: 2}
+  artworkSprite: {fileID: 928782855}
+  animator: {fileID: 928782860}
+  nuevoControlador0: {fileID: 9100000, guid: dfc8230e2a9e3e54e98a1bf5375f8bc4, type: 2}
+  nuevoControlador1: {fileID: 9100000, guid: 0660dbed5ef8b7b42940108b136d9c77, type: 2}
+  nuevoControlador2: {fileID: 9100000, guid: d1dda1bbcd13f9b4c8589da12144be15, type: 2}
 --- !u!95 &928782860
 Animator:
   serializedVersion: 5
