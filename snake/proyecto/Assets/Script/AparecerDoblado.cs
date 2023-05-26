@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class AparecerDoblado : MonoBehaviour
 {
+    public Sprite nou;
+    private SpriteRenderer siu;
     public int puntos,contador;
     public float angle;
+    private bool primera;
     // Start is called before the first frame update
     void Start()
     {
+        siu = GetComponent<SpriteRenderer>();
         angle = MoverSnake.instancia.angle;
         puntos = MoverSnake.instancia.puntos;
         contador = MoverSnake.instancia.puntos+2;
+        primera = true;
     }
 
     void Update(){
         if(puntos != MoverSnake.instancia.puntos){
             puntos++;
             contador++;
+        }
+        if(!MoverSnake.instancia.siguiente && primera){
+            primera = false;
+            siu.sprite = nou;
         }
         if(contador == 0){
             Destroy(gameObject);
