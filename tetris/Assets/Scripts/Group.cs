@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Group : MonoBehaviour
 {
+    double lastFall;
     bool isValidGridPos()
     {
         foreach (Transform child in transform)
@@ -38,6 +39,7 @@ public class Group : MonoBehaviour
             Playfield.grid[(int)v.x, (int)v.y] = child;
         }
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -47,11 +49,10 @@ public class Group : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        double lastFall = 0;
         
         // Move Left
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -98,11 +99,19 @@ public class Group : MonoBehaviour
         }
 
         // Move Downwards and Fall
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - lastFall >= 1)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || (Time.time - lastFall >= 0.2))
         {
-            
+
+            Debug.Log("actual" + Time.time);
+            Debug.Log("baja");
+            Debug.Log(lastFall);
+            lastFall = Time.time;
+            Debug.Log(lastFall);
+
+            Debug.Log(isValidGridPos());
             // Modify position
             transform.position += new Vector3(0, -1, 0);
+
 
             // See if valid
             if (isValidGridPos())
@@ -112,7 +121,7 @@ public class Group : MonoBehaviour
             }
             else
             {
-                // It's not valid. revert.
+                // Restaurar posición anterior
                 transform.position += new Vector3(0, 1, 0);
 
                 // Clear filled horizontal lines
