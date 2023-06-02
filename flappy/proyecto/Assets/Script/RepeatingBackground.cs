@@ -11,7 +11,7 @@ public class RepeatingBackground : MonoBehaviour
     }
     
     private void RepositionBackground(){
-        transform.Translate(Vector2.right * bc2d.size.x * 2);
+        transform.Translate(Vector2.right * bc2d.size.x * 2000/1005);
     }
 
     // Update is called once per frame
