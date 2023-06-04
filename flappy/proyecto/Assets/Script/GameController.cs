@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
     public GameObject gameOverText;
     public bool gameOver;
     public float scrollSpeed = -1.5f;
+    private Dictionary<string,string> aver;
 
     private int score;
     public Text scoreText;
@@ -34,13 +36,17 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        aver = new Dictionary<string,string>();
     }
 
 
     public void BirdDie(){
+        if(gameOver)
+            return;
         gameOverText.SetActive(true);
         gameOver = true;
+        if(score > int.Parse(UserDatabase.instancia.res["puntaje"]))
+            StartCoroutine(UserDatabase.instancia.UploadUserData(UserDatabase.instancia.apiUrl1,new string[]{"idUser","puntaje"},new string[]{UserDatabase.instancia.id.ToString(),score.ToString()},valor => aver = valor));
     }
 
     public void OnDestroy(){
