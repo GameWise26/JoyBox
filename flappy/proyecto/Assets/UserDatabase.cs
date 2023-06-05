@@ -1,67 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
+using System.Threading.Tasks;
+
+
+public class DataItem
+{
+    public string idUser;
+}
 
 public class UserDatabase : MonoBehaviour
 {
     public static UserDatabase instancia;
-    public int id;
-    private bool bandera;
-    public Dictionary<string,string> res;
-    public Text recordText;
     public string apiUrl = "https://joyboxapp.000webhostapp.com/seleccionarPuntaje.php";
     public string apiUrl1 = "https://joyboxapp.000webhostapp.com/actualizarPuntaje.php";
+    public Dictionary<string,string> aver;
+    public int id;
 
     private void Awake(){
         if(UserDatabase.instancia == null){
-            UserDatabase.instancia = this;    
+            UserDatabase.instancia = this;
+            DontDestroyOnLoad(this);
         }
     }
 
-    void Start()
+    async void Start()
     {
-        res = new Dictionary<string,string>();
         id = 1;
-        StartCoroutine(UploadUserData(apiUrl,new string[]{"idUser"},new string[]{id.ToString()},valor => res = valor));
+        aver = await UploadUserData(apiUrl,new string[]{"idUser"},new string[]{id.ToString()});
     }
 
-    void Update(){
-        if(!bandera && res.Where(v => v.Key == "puntaje").Any()){
-            bandera = true;
-            recordText.text = "Record: "+res["puntaje"];
-        }
-    }
-
-    public IEnumerator UploadUserData(string url,string[] campos, string[] valores, System.Action<Dictionary<string,string>> callback)
+    public async Task<Dictionary<string,string>> UploadUserData(string url,string[] campos, string[] valores)
     {
+        Dictionary<string,string> response = new Dictionary<string,string>();
         WWWForm form = new WWWForm();
         for(int i = 0; i < campos.Length; i++){
             form.AddField(campos[i], valores[i]);
         }
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post(url, form))
-        {
-            yield return webRequest.SendWebRequest();
+        UnityWebRequest webRequest = UnityWebRequest.Post(url,form);
 
-            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Error en la solicitud: " + webRequest.error);
-            }
-            else
-            {
-                // La solicitud fue exitosa, procesa la respuesta recibida
-                string response = webRequest.downloadHandler.text;
-                Dictionary<string,string> resultados = new Dictionary<string,string>();
-                string[] subs = response.Split("|");
-                for(int i = 0; i < subs.Length/2; i+=2){
-                    resultados[subs[i]] = subs[i+1];
-                }
-                callback.Invoke(resultados);
-                // Puedes realizar cualquier procesamiento adicional aquí
-            }
+        var operation = webRequest.SendWebRequest();
+
+        while (!operation.isDone)
+        {
+            await Task.Yield();
         }
+
+        if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error en la solicitud: " + webRequest.error);
+        }
+        else
+        {
+            string texto = webRequest.downloadHandler.text;
+            string[] subs = texto.Split("|");
+            for(int i = 0; i < subs.Length/2; i+=2){
+                response[subs[i]] = subs[i+1];
+            }
+
+        }
+        return response;
     }
 }

@@ -11,10 +11,11 @@ public class GameController : MonoBehaviour
     public GameObject gameOverText;
     public bool gameOver;
     public float scrollSpeed = -1.5f;
-    private Dictionary<string,string> aver;
+
+    //Banda, siempre que quieran hacer consultas a la bd desde algun script, declaren primero este tipo de Dictionary
 
     private int score;
-    public Text scoreText;
+    public Text scoreText, recordText;
 
     private void Awake(){
         if(GameController.instance == null){
@@ -34,19 +35,27 @@ public class GameController : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    //Deben usar el modificador async en cada función que usen el UploadUserData
     void Start()
     {
-        aver = new Dictionary<string,string>();
+        // Tambien no se olviden de usar el modificador await como a continuación
+        recordText.text = "Record: "+UserDatabase.instancia.aver["puntaje"];
     }
 
 
-    public void BirdDie(){
+    public async void BirdDie(){
         if(gameOver)
             return;
         gameOverText.SetActive(true);
         gameOver = true;
-        if(score > int.Parse(UserDatabase.instancia.res["puntaje"]))
-            StartCoroutine(UserDatabase.instancia.UploadUserData(UserDatabase.instancia.apiUrl1,new string[]{"idUser","puntaje"},new string[]{UserDatabase.instancia.id.ToString(),score.ToString()},valor => aver = valor));
+        Dictionary<string,string> a;
+        if(score > int.Parse(UserDatabase.instancia.aver["puntaje"])){
+            a = await UserDatabase.instancia.UploadUserData(UserDatabase.instancia.apiUrl1,new string[] {"idUser","puntaje"},new string[]{UserDatabase.instancia.id.ToString(),score.ToString()});
+        if(bool.Parse(a["exito"])){
+            UserDatabase.instancia.aver["puntaje"] = score.ToString();
+            recordText.text = "Record: "+score;
+        }
+        }
     }
 
     public void OnDestroy(){
