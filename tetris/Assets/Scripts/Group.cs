@@ -5,6 +5,8 @@ using UnityEngine;
 public class Group : MonoBehaviour
 {
     double lastFall;
+    public GameObject tetromino;
+
     bool isValidGridPos()
     {
         foreach (Transform child in transform)
@@ -49,7 +51,6 @@ public class Group : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
     // Update is called once per frame
     void Update()
     {
@@ -91,8 +92,20 @@ public class Group : MonoBehaviour
 
             // See if valid
             if (isValidGridPos())
+            {
                 // It's valid. Update grid.
                 updateGrid();
+                //Rotate sprite
+                Transform[] blockTransforms = tetromino.GetComponentsInChildren<Transform>();
+                foreach (Transform blockTransform in blockTransforms)
+                {
+                    if (blockTransform != tetromino.transform)
+                    {
+                        // Rotar únicamente los objetos "block"
+                        blockTransform.Rotate(0, 0, 90);
+                    }
+                }
+            }
             else
                 // It's not valid. revert.
                 transform.Rotate(0, 0, 90);
@@ -102,13 +115,13 @@ public class Group : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow) || (Time.time - lastFall >= 0.2))
         {
 
-            Debug.Log("actual" + Time.time);
-            Debug.Log("baja");
-            Debug.Log(lastFall);
+            //Debug.Log("actual" + Time.time);
+            //Debug.Log("baja");
+            //Debug.Log(lastFall);
             lastFall = Time.time;
-            Debug.Log(lastFall);
+            //Debug.Log(lastFall);
 
-            Debug.Log(isValidGridPos());
+            //Debug.Log(isValidGridPos());
             // Modify position
             transform.position += new Vector3(0, -1, 0);
 
