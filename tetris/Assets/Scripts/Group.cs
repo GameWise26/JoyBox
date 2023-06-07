@@ -141,7 +141,7 @@ public class Group : MonoBehaviour
                 Playfield.deleteFullRows();
 
                 // Spawn next Group
-                FindObjectOfType<Spawner>().spawnNext();
+                FindObjectOfType<Spawner>().spawnNext(FindObjectOfType<Spawner>().crearBolsa());
 
                 // Disable script
                 enabled = false;
