@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3240225704187996508}
-  - component: {fileID: -4322876362635933132}
+  - component: {fileID: 5500778177363432358}
   m_Layer: 0
   m_Name: TetrominoO
   m_TagString: Untagged
@@ -204,7 +204,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4322876362635933132
+--- !u!114 &5500778177363432358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,10 +213,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3904732492429851949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424cd5a0f63e0bc40975e8d94ac6609f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f536fac0b61ce44c8ff43b13659b17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetromino: {fileID: 3904732492429851949}
+  tetromino: {fileID: 0}
 --- !u!1 &5810477066892182472
 GameObject:
   m_ObjectHideFlags: 0

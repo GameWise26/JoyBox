@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Group : MonoBehaviour
+public class Tetromino : MonoBehaviour
 {
     double lastFall;
-    public List<GameObject> bolsa = new List<GameObject>();
-    public int pieza = 0;
+    public GameObject tetromino;
     bool existe = true;
 
     bool isValidGridPos()
@@ -47,9 +46,6 @@ public class Group : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bolsa = FindObjectOfType<Spawner>().crearBolsa(bolsa);
-        existe = false;
-       
         if (!isValidGridPos())
         {
             Debug.Log("GAME OVER");
@@ -91,7 +87,7 @@ public class Group : MonoBehaviour
         }
 
         // Rotate
-        /*else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, -90);
 
@@ -114,7 +110,7 @@ public class Group : MonoBehaviour
             else
                 // It's not valid. revert.
                 transform.Rotate(0, 0, 90);
-        }*/
+        }
 
         // Move Downwards and Fall
         else if (Input.GetKeyDown(KeyCode.DownArrow) || (Time.time - lastFall >= 0.2))
@@ -145,11 +141,6 @@ public class Group : MonoBehaviour
 
                 // Clear filled horizontal lines
                 Playfield.deleteFullRows();
-
-                // Spawn next Group
-                
-                FindObjectOfType<Spawner>().spawnNext(bolsa, pieza);
-                pieza++;
                 // Disable script
                 enabled = false;
             }

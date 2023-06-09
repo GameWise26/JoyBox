@@ -6,35 +6,48 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] groups;
     int piezasUsadas;
+    public List<GameObject> bolsa = new List<GameObject>();
+    int piezasppawn = 0;
+    bool existe = true;
+    //bool existe2 = true;
 
-    public List<GameObject> crearBolsa()
+    public List<GameObject> crearBolsa(List<GameObject> bolsa)
     {
-        List<GameObject> bolsa = new List<GameObject>();
-        for (int i = 0; i < groups.Length; i++)
+        int numer = 0;
+        List<int> nume = new List<int>();
+        for (int i = 0; i < 7; i++)
+            nume.Add(i);
+
+        for (int i = 0; i < nume.Count + 6; i++)
         {
-            bolsa.Add(groups[i]);
+            numer = nume[Random.Range(0, nume.Count)];
+            bolsa.Add(groups[numer]);
+            nume.Remove(numer);
         }
+        for (int i = 0; i < bolsa.Count; i++)
+            Debug.Log(bolsa[i]);
+
         return bolsa;
     }
-    
-    public void spawnNext(List<GameObject> bolsa)
+
+    public void spawnNext(List<GameObject> bolsa, int pieza)
     {
-        piezasUsadas++;
-        int tetromino = Random.Range(0, bolsa.Count);
-        Instantiate(groups[tetromino],
-                    transform.position,
-                    Quaternion.identity);
+        //if (pieza < 7 && pieza >= 0)
+        //for (int i = 0; i< 7 ; i++){
+        Instantiate(bolsa[0], transform.position, Quaternion.identity);
+
+        if (pieza == bolsa.Count)
+        {
+            crearBolsa(bolsa);
+            pieza = 0;
+        }
+        //else
+        ////}
         
-        bolsa.RemoveAt(tetromino);
-        if (piezasUsadas == 7) { crearBolsa(); }
     }
 
     void Start()
     {
-        List<GameObject> bolsa = crearBolsa();
-        spawnNext(bolsa);
+        spawnNext(bolsa, piezasppawn);
     }
 }
-
-
-
