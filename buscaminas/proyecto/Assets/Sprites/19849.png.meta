@@ -440,7 +440,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -448,6 +448,69 @@ TextureImporter:
       bones: []
       spriteID: ea52fa79e4f29e54c9f5bbcf93071059
       internalID: 45155053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 19849_16
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 59
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58541be6f76d0d04fb4ddbefff16db82
+      internalID: -278017094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 19849_17
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 36
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa7c07ed2d820784dabcae11f1e70c83
+      internalID: 2120057743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 19849_18
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 36
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fa0000d962c5744f97e33f063609b39
+      internalID: -833676461
       vertices: []
       indices: 
       edges: []
@@ -471,6 +534,9 @@ TextureImporter:
       19849_13: -99592970
       19849_14: 378934983
       19849_15: 45155053
+      19849_16: -278017094
+      19849_17: 2120057743
+      19849_18: -833676461
       19849_2: 2117613301
       19849_3: -1430652139
       19849_4: 1284494367
