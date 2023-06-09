@@ -150,25 +150,11 @@ public class Minas : MonoBehaviour
                 mostrarVaciasArribaa(index,i+9,original,usados);
             }
             original++;
-            /*if(index-(8*(i+1)) >= 0 && childs[index-(8*(i+1))].numero == 0){
-                childs[index-(8*(i+1))].mina.GetComponent<Casilla>().mostrar();
-                mostrarVaciasIzquierda(index-(8*(i+1)),0);
-                if(index-(8*(i+2)) > 0 && childs[index-(8*(i+2))].numero != 0)
-                    childs[index-(8*(i+2))].mina.GetComponent<Casilla>().mostrar();
-            }
-            if(index-(8*(i+1)) > 0 && childs[index-(8*(i+1))].numero != 0){
-                if(intentos == 4)
-                    break;
-                intentos++;
-                mostrarVaciasIzquierda(index,intentos);
-                break;
-            }*/
-
         }
     }
     private void mostrarVaciasArribaa(int index,int pos, int original, List<int> usados){
             if(pos == index)
-                childs[original].mina.GetComponent<Casilla>().mostrar();
+                childs[original].mina.GetComponent<Casilla>().mostrar(false);
             int si = posibles.Find(v => v - pos > -8);
             if(!usados.Exists(v => v == pos-8) && pos-8 >= 0 && childs[pos-8].numero == 0){
                 usados.Add(pos-8);
