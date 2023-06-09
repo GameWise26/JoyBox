@@ -24,7 +24,10 @@ public class Casilla : MonoBehaviour
         if(!Minas.instancia.inicio){
             Minas.instancia.inicio = true;
             Minas.instancia.crearMatch(id);
-            Minas.instancia.mostrarVacias(id);
+            img.sprite = Minas.instancia.sprites[Minas.instancia.childs[id].numero];
+            Minas.instancia.childs[id].mostrar = true;
+            Minas.instancia.mostrarVaciasArriba(id,0);
+            return;
         }
         if(Minas.instancia.childs[id].isBomb) Minas.instancia.mostrarMinas(id);
 

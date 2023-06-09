@@ -66,9 +66,9 @@ public class Minas : MonoBehaviour
                 count++;
             if(i-9 >= 0 && i-9 >= si - 8 && childs[i-9].isBomb)
                 count++;
-            if(i-7 > 0 && i-7 < si && childs[i-7].isBomb)
+            if(i-7 >= 0 && i-7 < si && childs[i-7].isBomb)
                 count++;
-            if(i-1 > 0 && i-1 >= si && childs[i-1].isBomb)
+            if(i-1 >= 0 && i-1 >= si && childs[i-1].isBomb)
                 count++;
             if(i+1 < childs.Count && i+1 < si+8 && childs[i+1].isBomb)
                 count++;
@@ -98,12 +98,40 @@ public class Minas : MonoBehaviour
         }
         fin = true;
     }
-    public void mostrarVacias(int index){
-        for(int i = 0; i < 8; i++){
-            if(index-(8*(i+1)) > 0 && childs[index-(8*(i+1))].numero == 0)
-                childs[index-(8*(i+1))].mina.GetComponent<Casilla>.mostrar();
-            else if(index-(8*(i+1)) > 0 && childs[index-(8*(i+1))].numero != 0)
+    public void mostrarVaciasArriba(int index, int pos){
+        for(int i = pos; i < childs.Count; i++){
+            int si = posibles.Find(v => v - i > -8);
+            int count = 0;
+            if(i-8 >= 0 && childs[i-8].isBomb)
+                mostrarVaciasArriba(index,i-8);
+            if(i-9 >= 0 && i-9 >= si - 8 && childs[i-9].isBomb)
+                mostrarVaciasArriba(index);
+            if(i-7 >= 0 && i-7 < si && childs[i-7].isBomb)
+                count++;
+            if(i-1 >= 0 && i-1 >= si && childs[i-1].isBomb)
+                count++;
+            if(i+1 < childs.Count && i+1 < si+8 && childs[i+1].isBomb)
+                count++;
+            if(i+7 < childs.Count && i+7 >= si+8 && childs[i+7].isBomb)
+                count++;
+            if(i+8 < childs.Count && childs[i+8].isBomb)
+                count++;
+            if(i+9 < childs.Count && i+9 <= si+15 && childs[i+9].isBomb)
+                count++;
+            /*if(index-(8*(i+1)) >= 0 && childs[index-(8*(i+1))].numero == 0){
+                childs[index-(8*(i+1))].mina.GetComponent<Casilla>().mostrar();
+                mostrarVaciasIzquierda(index-(8*(i+1)),0);
+                if(index-(8*(i+2)) > 0 && childs[index-(8*(i+2))].numero != 0)
+                    childs[index-(8*(i+2))].mina.GetComponent<Casilla>().mostrar();
+            }
+            if(index-(8*(i+1)) > 0 && childs[index-(8*(i+1))].numero != 0){
+                if(intentos == 4)
+                    break;
+                intentos++;
+                mostrarVaciasIzquierda(index,intentos);
                 break;
+            }*/
+
         }
     }
 }
