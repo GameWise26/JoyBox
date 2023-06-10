@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
     {
         //if (pieza < 7 && pieza >= 0)
         //for (int i = 0; i< 7 ; i++){
-        Instantiate(bolsa[0], transform.position, Quaternion.identity);
+        Instantiate(bolsa[pieza], transform.position, Quaternion.identity);
 
         if (pieza == bolsa.Count)
         {
@@ -48,6 +48,9 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        if (existe)
+            crearBolsa(bolsa);
+        existe = false;
         spawnNext(bolsa, piezasppawn);
     }
 }

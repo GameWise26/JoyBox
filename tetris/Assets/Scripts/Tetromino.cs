@@ -7,6 +7,9 @@ public class Tetromino : MonoBehaviour
     double lastFall;
     public GameObject tetromino;
     bool existe = true;
+    public List<GameObject> bolsa = new List<GameObject>();
+    public int pieza = 0;
+
 
     bool isValidGridPos()
     {
@@ -141,6 +144,11 @@ public class Tetromino : MonoBehaviour
 
                 // Clear filled horizontal lines
                 Playfield.deleteFullRows();
+
+
+                FindObjectOfType<Spawner>().spawnNext(bolsa, pieza);
+                pieza++;
+
                 // Disable script
                 enabled = false;
             }
