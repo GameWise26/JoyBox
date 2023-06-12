@@ -29,4 +29,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Interfaz_social_chat.unity
     guid: f46dc384781aca8409308e494f417e34
+  - enabled: 1
+    path: Assets/Scenes/Interfaz_notificaciones.unity
+    guid: 7ab89a78b0b64b44a933e1d58d54e759
+  - enabled: 1
+    path: Assets/Scenes/Interfaz_com_chat.unity
+    guid: 872bdb1b5a0612445ae4603b44ce390e
+  - enabled: 1
+    path: Assets/Scenes/Interfaz_com_juegos.unity
+    guid: cc75709834c6f234c98da6f68a700277
+  - enabled: 1
+    path: Assets/Scenes/Interfaz_comunidades.unity
+    guid: 51a881d696c8d7248875da06b4e78f92
   m_configObjects: {}
