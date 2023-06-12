@@ -18,7 +18,7 @@ public class Piece : MonoBehaviour
 
     public void Initialize(Board board, Vector3Int position, TetrominoData data)
     {
-        this.board = board;
+        this.board = GetComponent<Board>();
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
@@ -30,6 +30,8 @@ public class Piece : MonoBehaviour
         {
             this.cells = new Vector3Int[data.cells.Length];
         }
+
+
 
         for (int i = 0; i < data.cells.Length; i++)
         {
