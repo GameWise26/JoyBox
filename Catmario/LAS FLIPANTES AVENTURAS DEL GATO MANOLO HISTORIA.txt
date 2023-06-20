@@ -1,0 +1,27 @@
+ANOTA LUIS ANOTA
+
+historia las flipantes aventuras del gato manolo
+manolo es un gato muy epico que esta a punto de tener una cena romantica con su novia la gata "Gurrumina" , 
+Manolo como es un imbecil se olvido de preparar la super cena epica (era un sadwich epico) asi que manolo tendra que ir en buscar de los ingredientes 
+enfrentadose un monton de enemigos y mundos 
+
+3 finales
+(al final del juego se contara cuanto ingredientes manolo agarro por nivel son 4 ingredientes por nivel asi que , ahora hay 5 niveles entonces el maximo es 40)
+
+Ingredientes == 40 
+manolo es increible y consiguio todo los ingredientes , cocino y tuvo su cena romantico , nacen gurrimitos y manolitos
+
+
+ingredientes >= 20 
+manolo solo consiguio la mitad de los ingredientes , pero no importa logra prerarar un sandiwch medio epico , y gurrimina y el comen felices 
+
+ingredientes < 20
+manolo no logro conseguir todos los ingredientes , cocina pero explota el sadwcih termina creando un bodrio de sandiwch pero con sus huevos gatunos va a la cena
+gurrimina come el bodrio ese y termina con una intoxicacion clase z , terminando hospitalizado , termina su relacion con manolo y se va con su primo el gato "Chuck"
+manolo termina suicidandose
+
+FINAL SECRETOOOOOOOOO
+ingredientes < 20 pero con la cantidad maxima de monedas (no las conte)
+sale todo mal , pero manolo se vuelve millonario asi que no se mata y termina siendo un empresario en dubai y tiene una foto con cristiano ronaldo  
+gurrimina quiere volver con el pero le dice
+"MIAU" y nos deja una señal de vida que todas son iguales 
