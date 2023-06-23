@@ -12,22 +12,25 @@ public class SocketManager : MonoBehaviour
     public static SocketManager instancia;
     public SocketIOUnity socket;
 
-    public InputField EventNameTxt;
-    public InputField DataTxt;
-    public Text ReceivedText;  
+    //Datos del usuario
+    public string nombre;
 
     public GameObject objectToSpin;
 
     private void Awake(){
         if(SocketManager.instancia == null){
             SocketManager.instancia = this;
+            DontDestroyOnLoad(this);
+        }else if(SocketManager.instancia != this){
+            Destroy(this);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         //TODO: check the Uri if Valid.
-        var uri = new Uri("https://joyboxapp.onrender.com");
+        //var uri = new Uri("https://joyboxapp.onrender.com");
+        var uri = new Uri("http://localhost:3000");
         socket = new SocketIOUnity(uri, new SocketIOOptions
         {
             Query = new Dictionary<string, string>

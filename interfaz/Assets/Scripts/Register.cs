@@ -14,19 +14,18 @@ class Formulario{
     public string rcontrasenia{get;set;}
     public string correo{get;set;}
 }
-class Resultado{
-    public bool exito;
-}
 
 public class Register : MonoBehaviour
 {
-    public TextMeshProUGUI usuario,contrasenia,email,rcontrasenia,edad;
+    public TextMeshProUGUI usuario,contrasenia,email,rcontrasenia,edad,msgbox;
     // Start is called before the first frame update
     void Start()
     {
         SocketManager.instancia.socket.OnUnityThread("registro", (response) =>
         {
-            Debug.Log(JsonUtility.FromJson<Resultado>(response.ToString()).exito);
+            Dictionary<string,bool> res = JsonConvert.DeserializeObject<Dictionary<string,bool>>(response.ToString().Split('[')[1].Split(']')[0]);
+            if(res["exito"]) msgbox.text = "Se registro correctamente, ahora inicie sesion";
+            else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
 
