@@ -25,15 +25,15 @@ public class EndingManager : MonoBehaviour
         int totalComidas = gameManager.GetComidas();
         int totalMonedas = gameManager.GetPuntosTotales();
 
-        if (totalComidas >= 25)
+        if (totalComidas == 20)
         {
             goodEndingCanvas.SetActive(true);
         }
-        else if (totalComidas >= 15 && totalComidas <= 24)
+        else if (totalComidas >= 10 && totalComidas <= 19)
         {
             neutralEndingCanvas.SetActive(true);
         }
-        else if (totalComidas < 14)
+        else if (totalComidas < 9)
         {
             badEndingCanvas.SetActive(true);
         }
