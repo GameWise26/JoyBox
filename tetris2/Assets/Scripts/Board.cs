@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
     public void SpawnPiece()
     {
         int random = Random.Range(0, this.tetrominos.Length);
-        TetrominoData data = FindObjectOfType<Bag>().GetNextPiece();
+        TetrominoData data = this.tetrominos[random];
 
         this.activePiece.Initialize(this, this.spawnPosition, data);
 
