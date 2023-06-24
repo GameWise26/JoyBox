@@ -27,6 +27,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Nivel 05.unity
     guid: 85831ee311dd08641908c9c86ed2275d
   - enabled: 1
-    path: Assets/Scenes/Escena Final.unity
-    guid: 40c87e03d39d0424e9617bd750144f8d
+    path: Assets/Scenes/FinalManagerScene.unity
+    guid: 8b68f35f991cf2b4ca94b1457463e498
+  - enabled: 1
+    path: Assets/Scenes/FinalBuenoScene.unity
+    guid: 8f7593408f05c8641b63ee0b6761fb25
+  - enabled: 1
+    path: Assets/Scenes/FinalNeutroScene.unity
+    guid: b0e1b10d8cc3ce744941c3e492068255
+  - enabled: 1
+    path: Assets/Scenes/FinalSecretoScene.unity
+    guid: 5f527bdfc090db8498498463a30f6652
+  - enabled: 1
+    path: Assets/Scenes/FinalMaloScene.unity
+    guid: df7b96ee9c4329b41902000aac33d99c
+  - enabled: 1
+    path: Assets/Scenes/Historia.unity
+    guid: d2e524e0e3170174a86be8765aa2ffcc
   m_configObjects: {}

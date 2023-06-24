@@ -20,7 +20,7 @@ public class CaidaVacio : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             gameManager.PerderVida();
-            collision.GetComponent<michimovimiento>().Recolocar();
+            collision.GetComponent<michimovimiento>().RecolocarPersonaje();
         }
     }
 }

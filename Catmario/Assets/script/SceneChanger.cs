@@ -1,20 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    private bool hasInteracted = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !hasInteracted)
         {
-            GameManager.Instance.GuardarComidas(); // Guardar comidas antes de cambiar de escena
-            GameManager.Instance.GuardarPuntaje(); // Guardar puntaje antes de cambiar de escena
+            hasInteracted = true;
+            GameManager.Instance.GuardarComidas();
+            GameManager.Instance.GuardarPuntaje();
             Debug.Log("Cambio de nivel");
+
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
-            SceneManager.LoadScene(nextSceneIndex);
+
+            if (currentSceneIndex == 6) 
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+                Invoke("CargarFinalScene", 0.5f); 
+            }
+            else
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+            }
         }
+    }
+
+    private void CargarFinalScene()
+    {
+        SceneManager.LoadScene("FinalManagerScene");
     }
 }

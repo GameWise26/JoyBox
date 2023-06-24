@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.853, y: 83}
+  m_AnchoredPosition: {x: 25.853, y: -38}
   m_SizeDelta: {x: 166.6367, y: 20.5505}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584690439
@@ -633,7 +633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 109}
+  m_AnchoredPosition: {x: 0, y: 129}
   m_SizeDelta: {x: 218.343, y: 192.8133}
   m_Pivot: {x: 0.5, y: 0.29516226}
 --- !u!114 &749493086
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sanguchazo
+  m_text: Las flipantes aventuras del gato Manolo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32ae9ae614e72a84d8868cb0a548f2f0, type: 2}
   m_sharedMaterial: {fileID: -3112345741660937686, guid: 32ae9ae614e72a84d8868cb0a548f2f0, type: 2}
@@ -903,7 +903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 0.96875, y: 1}
-  m_AnchoredPosition: {x: 3.129303, y: 2.7757}
+  m_AnchoredPosition: {x: 3.129303, y: -1.5}
   m_SizeDelta: {x: 6.2587, y: 6.5514}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &923949333
@@ -1181,7 +1181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.5, y: -119}
+  m_AnchoredPosition: {x: 14.5, y: -210}
   m_SizeDelta: {x: 166.6367, y: 20.5505}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &993315511
@@ -1588,8 +1588,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.5, y: -18.743}
-  m_SizeDelta: {x: 166.6367, y: 20.5505}
+  m_AnchoredPosition: {x: 14.873991, y: -114.27}
+  m_SizeDelta: {x: 166.974, y: 25.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1587534204
 MonoBehaviour:

@@ -16,8 +16,8 @@ public class michimovimiento : MonoBehaviour
     private bool puedeMoverse = true;
     private GameManager gameManager;
 
+    private Vector3 checkpointPosition;
     float Xinicial, Yinicial;
-
     private void Start()
     {
         Xinicial = transform.position.x;
@@ -31,6 +31,8 @@ public class michimovimiento : MonoBehaviour
         {
             Debug.LogError("No se encontró el objeto GameManager en la escena.");
         }
+
+        checkpointPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -52,11 +54,19 @@ public class michimovimiento : MonoBehaviour
         return raycastHit.collider != null;
     }
 
+    private bool saltoRealizado = false;
+
     void ProcesarSalto()
     {
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && (taSuelo() || taEncimaPlataforma()))
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && (taSuelo() || taEncimaPlataforma()) && !saltoRealizado)
         {
             rigidBody.AddForce(Vector2.up * fuerzasalto, ForceMode2D.Impulse);
+            saltoRealizado = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space))
+        {
+            saltoRealizado = false;
         }
     }
 
@@ -128,10 +138,21 @@ public class michimovimiento : MonoBehaviour
         puedeMoverse = true;
     }
 
-    public void Recolocar()
+    public void SetCheckpoint()
+    {
+        checkpointPosition = transform.position;
+    }
+
+    public void RespawnAtCheckpoint()
+    {
+        transform.position = checkpointPosition;
+        puedeMoverse = true; 
+    }
+
+    public void RecolocarPersonaje()
     {
         transform.position = new Vector3(Xinicial, Yinicial, 0);
-        puedeMoverse = true; // Reiniciamos la variable puedeMoverse para permitir el movimiento nuevamente.
+        puedeMoverse = true; 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

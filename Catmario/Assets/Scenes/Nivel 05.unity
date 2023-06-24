@@ -1756,7 +1756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 88.744, y: -24.681}
+  m_AnchoredPosition: {x: 88.74402, y: -24.68097}
   m_SizeDelta: {x: 23.957397, y: 24.562195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189844369
@@ -4104,7 +4104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objetivo: {fileID: 883498908}
-  speed: 0.5
+  speed: 0.52
   deboPerseguir: 0
   distancia: 0
   distanciaAbsoluta: 0
@@ -5862,7 +5862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883498906}
   m_LocalRotation: {x: 0, y: 0.9961947, z: -0, w: -0.08715578}
-  m_LocalPosition: {x: -8.137, y: -1.424, z: 1.424}
+  m_LocalPosition: {x: -9.38, y: -1.01, z: 1.424}
   m_LocalScale: {x: 1.0253, y: 0.9415, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7244,8 +7244,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187881477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.74, y: 11.89, z: 0}
-  m_LocalScale: {x: 0.21248047, y: 0.19103026, z: 1}
+  m_LocalPosition: {x: -3.6388, y: 11.7604, z: 0}
+  m_LocalScale: {x: 0.15547197, y: 0.12948032, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -49601,7 +49601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734119428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.4469995, y: -1.1940002, z: -7.000993}
+  m_LocalPosition: {x: -8.69, y: -0.7800002, z: -7.000993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50415,7 +50415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936511802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.4469995, y: -1.1940002, z: -7.000993}
+  m_LocalPosition: {x: -8.69, y: -0.7800002, z: -7.000993}
   m_LocalScale: {x: 0.9140625, y: 0.7125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

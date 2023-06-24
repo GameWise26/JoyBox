@@ -343,7 +343,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1338210913}
         m_TargetAssemblyTypeName: Boton, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Historia
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -699,7 +699,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7eafd532b876b1046abcc99c2e010b20, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.151
+  m_Volume: 0.66
   m_Pitch: 1
   Loop: 1
   Mute: 0
