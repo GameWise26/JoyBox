@@ -474,8 +474,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Manolo consiguio la mitad de los ingredientes y logro preparar la cena
-    para comer con su amada '
+  m_text: 'Manolo consiguio ingredientes suficientes y logro preparar la cena para
+    comer con su amada '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 788c5ca4a49578c43b948be1d2bc69fe, type: 2}
   m_sharedMaterial: {fileID: 6038432876151854820, guid: 788c5ca4a49578c43b948be1d2bc69fe, type: 2}
