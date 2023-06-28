@@ -9,6 +9,7 @@ TagManager:
   - parte
   - cola
   - fruta
+  - sky
   layers:
   - Default
   - TransparentFX

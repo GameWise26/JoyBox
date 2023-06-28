@@ -7,7 +7,7 @@ public class Reiniciar : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetKeyUp(KeyCode.Space)){
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

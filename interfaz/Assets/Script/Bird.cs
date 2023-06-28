@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    private bool isDead = false, listo = false;
+    public bool isDead = false, listo = false, sig = false;
     public Rigidbody2D rb2d;
-    private Animator anim;
+    public Animator anim;
     public float upForce = 200f;
     private RotateBird rotateBird;
     public static Bird instance;
@@ -39,11 +39,14 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) || listo == true)
-        {
+        if(Input.GetKeyDown(KeyCode.Space)){
+            sig = true;
+        }
+        if ((Input.GetKeyUp(KeyCode.Space) || listo) && sig){
+            sig = false;
             listo = true;
             if (isDead) return;
-            if (Input.GetMouseButtonDown(0) && transform.position.y < 5)
+            if (transform.position.y < 5)
             {
                 rb2d.velocity = Vector2.zero;
                 rb2d.AddForce(Vector2.up * upForce);

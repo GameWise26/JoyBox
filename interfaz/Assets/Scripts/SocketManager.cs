@@ -8,6 +8,10 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 //using Debug = System.Diagnostics.Debug;
 
+public class Juego{
+    public string juego {get;set;}
+}
+
 public class SocketManager : MonoBehaviour
 {
     public static SocketManager instancia;
@@ -18,6 +22,8 @@ public class SocketManager : MonoBehaviour
     public string nombre;
     public List<string> amigos;
     public string juego;
+    public bool salirJuego;
+    public int flappyPuntos;
 
     public GameObject objectToSpin;
 
@@ -32,9 +38,10 @@ public class SocketManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        salirJuego = false;
         //TODO: check the Uri if Valid.
-        var uri = new Uri("https://joyboxapp.onrender.com");
-        //var uri = new Uri("http://localhost:3000");
+        //var uri = new Uri("https://joyboxapp.onrender.com");
+        var uri = new Uri("http://localhost:3000");
         socket = new SocketIOUnity(uri, new SocketIOOptions
         {
             Query = new Dictionary<string, string>
@@ -72,13 +79,28 @@ public class SocketManager : MonoBehaviour
         juego = "ningun juego";
         //Debug.Print("Connecting...");
         socket.Connect();
-        SocketManager.instancia.socket.OnUnityThread("inicioJuego", (response) =>{
+        /*SocketManager.instancia.socket.OnUnityThread("inicioJuego", (response) =>{
             Dictionary<string,string> dict = new Dictionary<string,string>();
             List<string> obj = JsonConvert.DeserializeObject<List<string>>(response.ToString().Substring(1,response.ToString().Length-2));
             dict.Add("nombre",juego);
             dict.Add("id",obj[0]);
             dict.Add("id_amigo",obj[1]);
             socket.Emit("esteJuego",JsonConvert.SerializeObject(dict));
+        });*/
+        SocketManager.instancia.socket.OnUnityThread("partidaAmigo", (response) =>{
+            Dictionary<string,string> obj = pasarDict(response);
+            for(int i = 0; i < amigos.Count; i++){
+                if(amigos[i] == obj["id_amigo"]){
+                    amigos[i+2] = obj["juego"];
+                    break;
+                }
+            }
         });
+    }
+    public void Emit(string evento,object valor){
+        socket.Emit(evento,JsonConvert.SerializeObject(valor));
+    }
+    public Dictionary<string,string> pasarDict(SocketIOResponse response){
+        return JsonConvert.DeserializeObject<Dictionary<string,string>>(response.ToString().Substring(1,response.ToString().Length-2));
     }
 }

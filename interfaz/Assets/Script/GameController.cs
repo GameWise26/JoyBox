@@ -38,7 +38,23 @@ public class GameController : MonoBehaviour
     //Deben usar el modificador async en cada función que usen el UploadUserData
     void Start()
     {
-        SocketManager.instancia.juego = "flappy";
+        if(SocketManager.instancia.juego != "flappy"){
+            SocketManager.instancia.socket.OnUnityThread("fPuntos", (response) =>{
+                int pts = int.Parse(SocketManager.instancia.pasarDict(response)["puntos"]);
+                recordText.text = "Record: " + pts;
+                SocketManager.instancia.flappyPuntos = pts;
+            });
+            Juego juego = new Juego{
+                juego = "flappy"
+            };
+            SocketManager.instancia.Emit("esteJuego",juego);
+            SocketManager.instancia.juego = "flappy";
+            SocketManager.instancia.salirJuego = true;
+            SocketManager.instancia.Emit("fPuntos",juego);
+        }
+        else{
+            recordText.text = "Record: " + SocketManager.instancia.flappyPuntos;
+        }
     }
 
 
@@ -47,6 +63,10 @@ public class GameController : MonoBehaviour
             return;
         gameOverText.SetActive(true);
         gameOver = true;
+        Dictionary<string,string> dict = new Dictionary<string,string>();
+        dict.Add("puntos",score.ToString());
+        SocketManager.instancia.Emit("faPuntos",dict);
+        if(SocketManager.instancia.flappyPuntos < score) SocketManager.instancia.flappyPuntos = score;
     }
 
     public void OnDestroy(){

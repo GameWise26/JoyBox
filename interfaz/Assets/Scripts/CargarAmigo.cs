@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CargarAmigo : MonoBehaviour
 {
     public TextMeshProUGUI nombre,juego;
-    public GameObject mismo;
+    public string juegod;
+    public GameObject mismo,ojo,estado;
     public static CargarAmigo instancia;
     private void Awake(){
         if(CargarAmigo.instancia == null){
@@ -22,6 +24,16 @@ public class CargarAmigo : MonoBehaviour
     public void MostrarDatos(string nombre, string juego){
         mismo.SetActive(true);
         this.nombre.text = nombre;
-        this.juego.text = juego;
+        if(juego == "defecto"){
+            ojo.SetActive(false);
+            estado.SetActive(false);
+        }
+        else{
+            this.juego.text = "Jugando al " + juego;
+            juegod = juego;
+        }
+    }
+    public void irPartida(){
+        SceneManager.LoadScene(juegod);
     }
 }
