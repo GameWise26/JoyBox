@@ -21,7 +21,8 @@ public class Login : MonoBehaviour
     {
         SocketManager.instancia.socket.OnUnityThread("login", (response) =>
         {
-            Dictionary<string,string> res = JsonConvert.DeserializeObject<Dictionary<string,string>>(response.ToString().Split('[')[1].Split(']')[0]);
+            string rest = response.ToString();
+            Dictionary<string,string> res = JsonConvert.DeserializeObject<Dictionary<string,string>>(rest.Substring(1,rest.Length-2));
             if(res.ContainsKey("nombre")){
                 SocketManager.instancia.nombre = res["nombre"];
                 SceneManager.LoadScene("interfaz_home");
@@ -29,6 +30,10 @@ public class Login : MonoBehaviour
             else{
                 Debug.Log("Error: "+response);
             }
+        });
+        SocketManager.instancia.socket.OnUnityThread("camigos", (response) =>{
+            string rest = response.ToString();
+            SocketManager.instancia.amigos = JsonConvert.DeserializeObject<List<string>>(rest.Substring(1,rest.Length-2));
         });
     }
     public void Enviar(){

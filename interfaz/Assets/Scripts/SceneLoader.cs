@@ -8,4 +8,7 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("interfaz_" + scene);
     }
+    public void CustomeScene(string scene){
+        SceneManager.LoadScene(scene);
+    }
 }

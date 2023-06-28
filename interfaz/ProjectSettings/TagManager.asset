@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - barrera
+  - rotadp
+  - parte
+  - cola
+  - fruta
   layers:
   - Default
   - TransparentFX
@@ -40,4 +45,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: a
+    uniqueID: 1189167717
+    locked: 0
+  - name: b
+    uniqueID: 330750179
+    locked: 0
+  - name: c
+    uniqueID: 1255366581
+    locked: 0
+  - name: d
+    uniqueID: 2570548257
+    locked: 0
+  - name: e
+    uniqueID: 2846878529
     locked: 0
