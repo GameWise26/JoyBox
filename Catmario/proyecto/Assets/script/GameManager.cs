@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     private int puntosTotales;
     private int comidas;
     private int vidas = 3;
-    public const int MAX_PUNTOS = 100;
     public event Action GameOver;
 
     private void Awake()

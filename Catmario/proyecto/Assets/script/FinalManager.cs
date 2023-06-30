@@ -16,7 +16,7 @@ public class FinalManager : MonoBehaviour
         {
             CargarFinalNeutro();
         }
-        else if (comidasTotales < 11 && puntosTotales > 250)
+        else if (comidasTotales < 11 && puntosTotales > 300)
         {
             CargarFinalSecreto();
         }
