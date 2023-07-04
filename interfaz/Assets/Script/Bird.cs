@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    public bool isDead = false, listo = false, sig = false;
+    public bool isDead = false, listo = false, sig = false,inicio=false;
     public Rigidbody2D rb2d;
     public Animator anim;
     public float upForce = 200f;
@@ -45,6 +45,10 @@ public class Bird : MonoBehaviour
         if ((Input.GetKeyUp(KeyCode.Space) || listo) && sig){
             sig = false;
             listo = true;
+            if(!inicio){
+                inicio = true;
+                SocketManager.instancia.Emit("finicio",new Dictionary<string,bool>(){{"inicio",true}});
+            }
             if (isDead) return;
             if (transform.position.y < 5)
             {
@@ -52,6 +56,7 @@ public class Bird : MonoBehaviour
                 rb2d.AddForce(Vector2.up * upForce);
                 anim.SetTrigger("Flap");
                 SoundSystem.instance.PlayFlap();
+                SocketManager.instancia.Emit("fflap",new Dictionary<string,bool>(){{"siu",true}});
             }
         }
     }

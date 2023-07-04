@@ -60,8 +60,8 @@ public class Bird1 : MonoBehaviour
         rotateBird.enabled = false;
         GameController1.instance.BirdDie();
         rb2d.velocity = Vector2.zero;
-        SoundSystem1.instance.PlayHit();
-        SoundSystem1.instance.audioBackground.Stop();
+        SoundSystem.instance.PlayHit();
+        SoundSystem.instance.audioBackground.Stop();
     }
 
     //skin
@@ -93,7 +93,8 @@ public class Bird1 : MonoBehaviour
             rb2d.velocity = Vector2.zero;
             rb2d.AddForce(Vector2.up * upForce);
             anim.SetTrigger("Flap");
-            SoundSystem1.instance.PlayFlap();
+            SoundSystem.instance.PlayFlap();
+            Debug.Log("o");
         });
     }
 }

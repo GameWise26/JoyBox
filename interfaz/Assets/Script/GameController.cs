@@ -63,9 +63,8 @@ public class GameController : MonoBehaviour
             return;
         gameOverText.SetActive(true);
         gameOver = true;
-        Dictionary<string,string> dict = new Dictionary<string,string>();
-        dict.Add("puntos",score.ToString());
-        SocketManager.instancia.Emit("faPuntos",dict);
+        SocketManager.instancia.Emit("faPuntos",new Dictionary<string,string>(){{"puntos",score.ToString()}});
+        SocketManager.instancia.Emit("ffinal",new Dictionary<string,bool>(){{"fin",true}});
         if(SocketManager.instancia.flappyPuntos < score) SocketManager.instancia.flappyPuntos = score;
     }
 

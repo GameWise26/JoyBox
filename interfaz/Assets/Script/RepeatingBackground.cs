@@ -19,6 +19,7 @@ public class RepeatingBackground : MonoBehaviour
     {
         if(transform.position.x < -bc2d.size.x){
             RepositionBackground();
+            //SocketManager.instancia.Emit("fbg",new Dictionary<string,float>(){{"x",transform.position.x}});
         }
     }
 }

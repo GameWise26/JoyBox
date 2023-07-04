@@ -18,6 +18,7 @@ public class ColumnPool : MonoBehaviour
     public float spawnRate;
 
     private int currentColumn;
+    private bool bandera = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,15 +38,21 @@ public class ColumnPool : MonoBehaviour
         if(!GameController.instance.gameOver && timeSinceLastSpawned >= spawnRate){
             timeSinceLastSpawned = 0;
             SpawnColumn();
+            if(!bandera){
+                bandera = true;
+                SocketManager.instancia.Emit("ficols",new Dictionary<string,bool>(){{"empieza",true}});
+            }
         }
     }
 
     void SpawnColumn(){
         float spawnYPosition = Random.Range(columnMin,columnMax);
-            columns[currentColumn].transform.position = new Vector2(spawnXPosition,spawnYPosition);
-            currentColumn++;
-            if(currentColumn >= columnPoolSize){
-                currentColumn = 0;
-            }
+        columns[currentColumn].transform.position = new Vector2(spawnXPosition,spawnYPosition);
+        float x = currentColumn;
+        currentColumn++;
+        if(currentColumn >= columnPoolSize){
+            currentColumn = 0;
+        }
+        SocketManager.instancia.Emit("fcols",new Dictionary<string,float>(){{"y",spawnYPosition},{"pos",currentColumn}});
     }
 }

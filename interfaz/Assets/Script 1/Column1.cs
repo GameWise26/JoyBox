@@ -6,7 +6,7 @@ public class Column1 : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collider){
         if(collider.CompareTag("Player")){
-            GameController.instance.BirdScored();
+            GameController1.instance.BirdScored();
         }
     }
 }

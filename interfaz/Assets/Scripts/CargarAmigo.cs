@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CargarAmigo : MonoBehaviour
 {
     public TextMeshProUGUI nombre,juego;
-    public string juegod;
+    public string juegod,id;
     public GameObject mismo,ojo,estado;
     public static CargarAmigo instancia;
     private void Awake(){
@@ -21,7 +21,7 @@ public class CargarAmigo : MonoBehaviour
         
     }
 
-    public void MostrarDatos(string nombre, string juego){
+    public void MostrarDatos(string nombre, string juego, string id){
         mismo.SetActive(true);
         this.nombre.text = nombre;
         if(juego == "defecto"){
@@ -31,9 +31,11 @@ public class CargarAmigo : MonoBehaviour
         else{
             this.juego.text = "Jugando al " + juego;
             juegod = juego;
+            this.id = id;
         }
     }
     public void irPartida(){
+        SocketManager.instancia.id_espec = id;
         SceneManager.LoadScene(juegod);
     }
 }

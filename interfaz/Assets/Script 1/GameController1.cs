@@ -37,6 +37,10 @@ public class GameController1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SocketManager.instancia.Emit("fentro", new Dictionary<string,string>(){{"id",SocketManager.instancia.id_espec}});
+        /*SocketManager.instancia.OnUnityThread("finicio",(response)=>{
+            Bird1.instance.
+        });*/
     }
 
 
