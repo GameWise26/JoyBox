@@ -2114,7 +2114,7 @@ GameObject:
   - component: {fileID: 718791814}
   - component: {fileID: 718791813}
   m_Layer: 5
-  m_Name: seccion-perfil
+  m_Name: seccion-comunidades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2157,11 +2157,11 @@ MonoBehaviour:
   m_Content: {fileID: 1305007384}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 25
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 1549581363}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1631253918}

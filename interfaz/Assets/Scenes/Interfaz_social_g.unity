@@ -1241,7 +1241,7 @@ GameObject:
   - component: {fileID: 718791814}
   - component: {fileID: 718791813}
   m_Layer: 5
-  m_Name: seccion-perfil
+  m_Name: seccion-social-grupos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1284,11 +1284,11 @@ MonoBehaviour:
   m_Content: {fileID: 1305007384}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 25
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 1549581363}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1631253918}
@@ -4645,7 +4645,7 @@ GameObject:
   - component: {fileID: 1937244084}
   - component: {fileID: 1937244083}
   m_Layer: 5
-  m_Name: perfil
+  m_Name: social-grupos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
