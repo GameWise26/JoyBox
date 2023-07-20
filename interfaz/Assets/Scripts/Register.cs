@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 class Formulario{
     public string nombre { get; set; }
@@ -18,6 +20,7 @@ class Formulario{
 public class Register : MonoBehaviour
 {
     public TextMeshProUGUI usuario,contrasenia,email,rcontrasenia,edad,msgbox;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,10 @@ public class Register : MonoBehaviour
     }
 
     public void Enviar(){
+
+        if (!ValidarDatos())
+            return; 
+
         Formulario form = new Formulario{
             nombre = usuario.text,
             edad = edad.text,
@@ -39,6 +46,73 @@ public class Register : MonoBehaviour
         };
         SocketManager.instancia.socket.Emit("registro",JsonConvert.SerializeObject(form));
     }
+
+    private bool ValidarDatos()
+    {
+        if (string.IsNullOrEmpty(usuario.text) || string.IsNullOrEmpty(edad.text)|| string.IsNullOrEmpty(contrasenia.text) || string.IsNullOrEmpty(rcontrasenia.text) || string.IsNullOrEmpty(email.text))
+        {
+            msgbox.text = "Todos los campos son obligatorios";
+            return false;
+        }
+
+        if (contrasenia.text != rcontrasenia.text)
+        {
+            msgbox.text = "Las contraseñas no coinciden";
+            return false;
+        }
+
+        Debug.Log(email.text);
+      
+        if (ValidarFormatoCorreo(email.text) == false)
+        {
+            msgbox.text = "El formato del correo electrónico es inválido";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidarFormatoCorreo(string email)
+    {
+        email = email.Trim();
+
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
+
+        try
+        {
+            email = Regex.Replace(email, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+            string DomainMapper(Match match)
+            {
+                var idn = new IdnMapping();
+
+                string domainName = idn.GetAscii(match.Groups[2].Value);
+
+                return match.Groups[1].Value + domainName;
+            }
+        }
+        catch (RegexMatchTimeoutException e)
+        {
+            return false;
+        }
+        catch (ArgumentException e)
+        {
+            return false;
+        }
+
+        try
+        {
+            return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return false;
+        }
+
+    }
+
+
     public void irAlLogin(){
         SceneManager.LoadScene("interfaz_inicio_sesion");
     }
