@@ -30,10 +30,11 @@ public class Register : MonoBehaviour
         SocketManager.instancia.socket.OnUnityThread("registro", (response) =>
         {
             Dictionary<string, bool> res = JsonConvert.DeserializeObject<Dictionary<string, bool>>(response.ToString().Split('[')[1].Split(']')[0]);
-            if (res["exito"]) msgbox.text = "Se registro correctamente, ahora inicie sesion";
-            else if (res["EyN"]) msgbox.text = "El usuario y correo ingresados están en uso, ingrese otros por favor";
-            else if (res["email"]) msgbox.text = "El correo ingresado está en uso, ingrese otro por favor";
-            else if (res["nombre"]) msgbox.text = "El usuario ingresado está en uso, ingrese otro por favor";
+
+            if (res.ContainsKey("exito")) msgbox.text = "Se registro correctamente, ahora inicie sesion";
+            else if (res.ContainsKey("EyN")) msgbox.text = "El usuario y correo ingresados están en uso, ingrese otros por favor";
+            else if (res.ContainsKey("email")) msgbox.text = "El correo ingresado está en uso, ingrese otro por favor";
+            else if (res.ContainsKey("nombre")) msgbox.text = "El usuario ingresado está en uso, ingrese otro por favor";
             else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
