@@ -31,10 +31,10 @@ public class Register : MonoBehaviour
         {
             Dictionary<string, bool> res = JsonConvert.DeserializeObject<Dictionary<string, bool>>(response.ToString().Split('[')[1].Split(']')[0]);
 
-            if (res.ContainsKey("exito")) msgbox.text = "Se registro correctamente, ahora inicie sesion";
-            else if (res.ContainsKey("EyN")) msgbox.text = "El usuario y correo ingresados están en uso, ingrese otros por favor";
-            else if (res.ContainsKey("email")) msgbox.text = "El correo ingresado está en uso, ingrese otro por favor";
-            else if (res.ContainsKey("nombre")) msgbox.text = "El usuario ingresado está en uso, ingrese otro por favor";
+            if (res.ContainsKey("exito")) msgbox.text = "Se registro correctamente, ahora inicie sesión";
+            else if (res.ContainsKey("EyN")) msgbox.text = "El usuario y correo ingresados están en uso";
+            else if (res.ContainsKey("email")) msgbox.text = "El correo ingresado está en uso";
+            else if (res.ContainsKey("nombre")) msgbox.text = "El usuario ingresado está en uso";
             else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
@@ -66,7 +66,7 @@ public class Register : MonoBehaviour
 
         if (usuario.text.Length > 20 || usuario.text.Length < 4)
         {
-            msgbox.text = "El nombre de usuario debe tener entre 4 y 20 caracteres";
+            msgbox.text = "El usuario debe tener entre 4 y 20 caracteres";
             return false;
         }
 
@@ -78,13 +78,13 @@ public class Register : MonoBehaviour
 
         if (ValidarFormatoCorreo(email.text) == false)
         {
-            msgbox.text = "El formato del correo electrónico es inválido";
+            msgbox.text = "Correo electrónico inválido";
             return false;
         }
 
         if (ValidarSeguridadContrasenia(contrasenia.text).Any(c => c != null))
         {
-            msgbox.text = $"La contraseña al menos debe tener:\n{string.Join("\n", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
+            msgbox.text = $"La contraseña al menos debe tener: {string.Join(", ", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
             return false;
         }
 
