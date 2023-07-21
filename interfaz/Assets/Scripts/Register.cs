@@ -60,18 +60,11 @@ public class Register : MonoBehaviour
             return false;
         }
 
-        if (!int.TryParse(edad.text, out int edadNum)) 
-        { 
-            msgbox.text = "Fallo la conversion"; 
-            return false; 
-        }
-
-        if ( edadNum > 99 || edadNum < 5)
+        if (!int.TryParse(Regex.Replace(edad.text.Trim(), "[^0-9]", ""), out int edadNum) || edadNum > 99 || edadNum < 5)
         {
             msgbox.text = "Ingrese una edad válida";
             return false;
         }
-
 
         if (ValidarFormatoCorreo(email.text) == false)
         {
@@ -155,4 +148,17 @@ public class Register : MonoBehaviour
     {
         SceneManager.LoadScene("interfaz_inicio_sesion");
     }
+
+    /* string inputText = edad.text.Trim();
+
+         for (int i = 0; i < inputText.Length; i++)
+         {
+             Debug.Log("Carácter " + i + ": " + inputText[i] + " (Unicode: " + ((int)inputText[i]) + ")");
+         }
+
+         Debug.Log("Comparación: " + (inputText == "12")); */
+
+    /* string inputText = Regex.Replace(edad.text.Trim(), "[^0-9]", ""); // Eliminar caracteres no numéricos
+
+ Debug.Log("Comparación: " + (inputText == "12"));*/
 }
