@@ -31,6 +31,9 @@ public class Register : MonoBehaviour
         {
             Dictionary<string, bool> res = JsonConvert.DeserializeObject<Dictionary<string, bool>>(response.ToString().Split('[')[1].Split(']')[0]);
             if (res["exito"]) msgbox.text = "Se registro correctamente, ahora inicie sesion";
+            else if (res["EyN"]) msgbox.text = "El usuario y correo ingresados están en uso, ingrese otros por favor";
+            else if (res["email"]) msgbox.text = "El correo ingresado está en uso, ingrese otro por favor";
+            else if (res["nombre"]) msgbox.text = "El usuario ingresado está en uso, ingrese otro por favor";
             else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
@@ -57,6 +60,12 @@ public class Register : MonoBehaviour
         if (string.IsNullOrEmpty(usuario.text) || string.IsNullOrEmpty(edad.text) || string.IsNullOrEmpty(contrasenia.text) || string.IsNullOrEmpty(rcontrasenia.text) || string.IsNullOrEmpty(email.text))
         {
             msgbox.text = "Todos los campos son obligatorios";
+            return false;
+        }
+
+        if (usuario.text.Length > 20 || usuario.text.Length < 4)
+        {
+            msgbox.text = "El nombre de usuario debe tener entre 4 y 20 caracteres";
             return false;
         }
 
@@ -107,11 +116,11 @@ public class Register : MonoBehaviour
                 return match.Groups[1].Value + domainName;
             }
         }
-        catch (RegexMatchTimeoutException )
+        catch (RegexMatchTimeoutException)
         {
             return false;
         }
-        catch (ArgumentException )
+        catch (ArgumentException)
         {
             return false;
         }
@@ -160,5 +169,14 @@ public class Register : MonoBehaviour
 
     /* string inputText = Regex.Replace(edad.text.Trim(), "[^0-9]", ""); // Eliminar caracteres no numéricos
 
- Debug.Log("Comparación: " + (inputText == "12"));*/
+       Debug.Log("Comparación: " + (inputText == "12"));
+    
+     <?php
+require_once "conexion.php";
+$req = limpiar(json_decode(json_decode(file_get_contents('php://input'),true)["datos"],true));
+$sql ="INSERT INTO usuarios(nombre,edad,correo,contraseña) VALUES('".$req['nombre']."',".$req['edad'].",'".$req['correo']."',MD5('".$req['contrasenia']."'))";
+$consulta = mysqli_query($conn,$sql);
+echo json_encode(array("exito"=>true));
+     
+     */
 }
