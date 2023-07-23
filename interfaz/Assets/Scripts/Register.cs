@@ -22,26 +22,37 @@ class Formulario
 
 public class Register : MonoBehaviour
 {
-    public TextMeshProUGUI usuario, contrasenia, email, rcontrasenia, edad, msgbox;
+    public TMP_InputField usuario, contrasenia, email, rcontrasenia, edad;
+    public TextMeshProUGUI msgbox, msgbox2, msgbox3, msgbox4, msgbox5, msgbox6;
+    char[] CaracteresEspaciales = { '!', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~' };
+    private bool mostrarTextoContrasenia = false;
 
-    // Start is called before the first frame update
     void Start()
     {
+        contrasenia.onValueChanged.AddListener(OnContraseniaValueChanged);
+        rcontrasenia.onValueChanged.AddListener(OnRContraseniaValueChanged);
+        email.onValueChanged.AddListener(OnEmailValueChanged);
+        edad.onValueChanged.AddListener(OnEdadValueChanged);
+        usuario.onValueChanged.AddListener(OnUsuarioValueChanged);
+
         SocketManager.instancia.socket.OnUnityThread("registro", (response) =>
         {
             Dictionary<string, bool> res = JsonConvert.DeserializeObject<Dictionary<string, bool>>(response.ToString().Split('[')[1].Split(']')[0]);
 
             if (res.ContainsKey("exito")) msgbox.text = "Se registro correctamente, ahora inicie sesión";
-            else if (res.ContainsKey("EyN")) msgbox.text = "El usuario y correo ingresados están en uso";
-            else if (res.ContainsKey("email")) msgbox.text = "El correo ingresado está en uso";
-            else if (res.ContainsKey("nombre")) msgbox.text = "El usuario ingresado está en uso";
+            else if (res.ContainsKey("EyN"))
+            {
+                msgbox3.text = "El correo ingresado está en uso";
+                msgbox6.text = "El usuario ingresado está en uso";
+            }
+            else if (res.ContainsKey("email")) msgbox3.text = "El correo ingresado está en uso";
+            else if (res.ContainsKey("nombre")) msgbox6.text = "El usuario ingresado está en uso";
             else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
 
     public void Enviar()
     {
-
         if (!ValidarDatos())
             return;
 
@@ -51,46 +62,47 @@ public class Register : MonoBehaviour
             edad = edad.text,
             contrasenia = contrasenia.text,
             rcontrasenia = rcontrasenia.text,
-            correo = email.text
+            correo = email.text 
         };
         SocketManager.instancia.socket.Emit("registro", JsonConvert.SerializeObject(form));
     }
 
     private bool ValidarDatos()
     {
+
         if (string.IsNullOrEmpty(usuario.text) || string.IsNullOrEmpty(edad.text) || string.IsNullOrEmpty(contrasenia.text) || string.IsNullOrEmpty(rcontrasenia.text) || string.IsNullOrEmpty(email.text))
         {
-            msgbox.text = "Todos los campos son obligatorios";
+            //msgbox.text = "Todos los campos son obligatorios";
             return false;
         }
 
         if (usuario.text.Length > 20 || usuario.text.Length < 4)
         {
-            msgbox.text = "El usuario debe tener entre 4 y 20 caracteres";
+            //msgbox.text = "El usuario debe tener entre 4 y 20 caracteres";
             return false;
         }
 
         if (!int.TryParse(Regex.Replace(edad.text.Trim(), "[^0-9]", ""), out int edadNum) || edadNum > 99 || edadNum < 5)
         {
-            msgbox.text = "Ingrese una edad válida";
+            //msgbox.text = "Ingrese una edad válida";
             return false;
         }
 
         if (ValidarFormatoCorreo(email.text) == false)
         {
-            msgbox.text = "Correo electrónico inválido";
+            //msgbox.text = "Formato de correo electrónico inválido";
             return false;
         }
 
         if (ValidarSeguridadContrasenia(contrasenia.text).Any(c => c != null))
         {
-            msgbox.text = $"La contraseña al menos debe tener: {string.Join(", ", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
+            //msgbox.text = $"La contraseña al menos debe tener: {string.Join(", ", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
             return false;
         }
 
         if (contrasenia.text != rcontrasenia.text)
         {
-            msgbox.text = "Las contraseñas no coinciden";
+            //msgbox.text = "Las contraseñas no coinciden";
             return false;
         }
 
@@ -141,8 +153,6 @@ public class Register : MonoBehaviour
     {
         contrasenia = contrasenia.Trim();
 
-        char[] CaracteresEspaciales = { '!', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~' };
-
         string[] sugerencias = {
         Regex.IsMatch(contrasenia, @"[A-Z]") ? null : "Una mayúscula",
         Regex.IsMatch(contrasenia, @"[a-z]") ? null : "Una minúscula",
@@ -153,31 +163,110 @@ public class Register : MonoBehaviour
         return sugerencias;
     }
 
-
     public void irAlLogin()
     {
         SceneManager.LoadScene("interfaz_inicio_sesion");
     }
 
-    /* string inputText = edad.text.Trim();
+    private void OnUsuarioValueChanged(string newValue)
+    {
+        if (string.IsNullOrEmpty(newValue))
+        {
+            msgbox6.text = "Campo obligatorio";
+        }
+        else if (usuario.text.Length > 20 || usuario.text.Length < 4)
+        {
+            msgbox6.text = "El usuario debe tener entre 4 y 20 caracteres";
+        }
+        else
+        {
+            msgbox6.text = "";
+        }
+    }
 
-         for (int i = 0; i < inputText.Length; i++)
-         {
-             Debug.Log("Carácter " + i + ": " + inputText[i] + " (Unicode: " + ((int)inputText[i]) + ")");
-         }
+    private void OnEdadValueChanged(string newValue)
+    {
+        if (string.IsNullOrEmpty(newValue))
+        {
+            msgbox5.text = "Campo obligatorio";
+        }
+        else if (!int.TryParse(Regex.Replace(newValue.Trim(), "[^0-9]", ""), out int edadNum) || edadNum > 99 || edadNum < 5)
+        {
+            msgbox5.text = "Ingrese una edad válida";
+        }
+        else
+        {
+            msgbox5.text = "";
+        }
+    }
 
-         Debug.Log("Comparación: " + (inputText == "12")); */
+    private void OnRContraseniaValueChanged(string newValue)
+    {
+        Debug.Log(contrasenia);
 
-    /* string inputText = Regex.Replace(edad.text.Trim(), "[^0-9]", ""); // Eliminar caracteres no numéricos
+        if (string.IsNullOrEmpty(newValue))
+        {
+            msgbox4.text = "Campo obligatorio";
+        }
+        else if (contrasenia.text != rcontrasenia.text)
+        {
+            msgbox4.text = "Las contraseñas no coinciden";
+        }        
+        else
+        {
+            msgbox4.text = "";
+        }
 
-       Debug.Log("Comparación: " + (inputText == "12"));
-    
-     <?php
-require_once "conexion.php";
-$req = limpiar(json_decode(json_decode(file_get_contents('php://input'),true)["datos"],true));
-$sql ="INSERT INTO usuarios(nombre,edad,correo,contraseña) VALUES('".$req['nombre']."',".$req['edad'].",'".$req['correo']."',MD5('".$req['contrasenia']."'))";
-$consulta = mysqli_query($conn,$sql);
-echo json_encode(array("exito"=>true));
-     
-     */
+    }
+
+    private void OnEmailValueChanged(string newValue)
+    {
+        if (string.IsNullOrEmpty(newValue))
+        {
+            msgbox3.text = "Campo obligatorio";
+        }
+        else if (!ValidarFormatoCorreo(newValue))
+        {
+            msgbox3.text = "Formato de correo electrónico inválido";
+        }
+        else
+        {
+            msgbox3.text = "";
+        }
+    }
+
+    private void OnContraseniaValueChanged(string newValue)
+    {
+        newValue = newValue.Trim();
+
+        if (string.IsNullOrEmpty(newValue))
+        {
+            msgbox2.text = "Campo obligatorio";
+        }
+        else if (!Regex.IsMatch(newValue, @"[A-Z]"))
+        {
+            msgbox2.text = "La contraseña al menos debe tener una mayúscula";
+        }
+        else if (!Regex.IsMatch(newValue, @"[a-z]"))
+        {
+            msgbox2.text = "La contraseña al menos debe tener una minuscula";
+        }
+        else if (!newValue.Any(c => CaracteresEspaciales.Contains(c)))
+        {
+            msgbox2.text = "La contraseña al menos debe tener un caracter especial";
+        }
+        else if (!Regex.IsMatch(newValue, @"\d"))
+        {
+            msgbox2.text = "La contraseña al menos debe tener un número";
+        }
+        else if (newValue.Length < 9 || newValue.Length > 20)
+        {
+            msgbox2.text = "La contraseña al menos debe tener entre 9 y 20 caracteres";
+        }
+        else
+        {
+            msgbox2.text = "";
+        }
+    }
+
 }
