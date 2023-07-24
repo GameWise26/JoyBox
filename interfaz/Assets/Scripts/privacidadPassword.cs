@@ -8,6 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public TMP_InputField contraseniaInputField;
     public TMP_InputField rcontraseniaInputField;
+    public TMP_InputField confirmarInputField;
     public Image botonImage;
     public Sprite ojoAbiertoSprite;
     public Sprite ojoCerradoSprite;
@@ -18,6 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
         showPassword = !showPassword;
         CambiarVisibilidad(contraseniaInputField);
         CambiarVisibilidad(rcontraseniaInputField);
+        CambiarVisibilidad(confirmarInputField);
         CambiarImagenBoton();
     }
 

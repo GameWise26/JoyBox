@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6966318639107098506}
   - component: {fileID: 3686903464745348724}
   - component: {fileID: 4847492557107550777}
+  - component: {fileID: 8470890379519437404}
   m_Layer: 5
   m_Name: btn-juegos
   m_TagString: Untagged
@@ -133,6 +134,19 @@ MonoBehaviour:
           m_StringArgument: juegos
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8470890379519437404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260898000190141989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &709466941164285123
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +159,7 @@ GameObject:
   - component: {fileID: 3020051905141087294}
   - component: {fileID: 1321077067982803539}
   - component: {fileID: 7783823684104392500}
+  - component: {fileID: 547646953788062978}
   m_Layer: 5
   m_Name: btn-notificaciones
   m_TagString: Untagged
@@ -266,6 +281,19 @@ MonoBehaviour:
           m_StringArgument: notificaciones
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &547646953788062978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709466941164285123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &1122855493133995189
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +306,7 @@ GameObject:
   - component: {fileID: 2940736427883304251}
   - component: {fileID: 9064605250060356507}
   - component: {fileID: 155127308542112453}
+  - component: {fileID: 4952534754520601424}
   m_Layer: 5
   m_Name: btn-configuracion
   m_TagString: Untagged
@@ -386,7 +415,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9064605250060356507}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9070363788290522849}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadNextScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: configuraciones
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4952534754520601424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122855493133995189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &1512446930614113556
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +453,7 @@ GameObject:
   - component: {fileID: 6040445192393411965}
   - component: {fileID: 7899298704868399151}
   - component: {fileID: 1349566743609180226}
+  - component: {fileID: 5754843212606326312}
   m_Layer: 5
   m_Name: btn-home
   m_TagString: Untagged
@@ -520,6 +575,19 @@ MonoBehaviour:
           m_StringArgument: home
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5754843212606326312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512446930614113556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &1818653581132453863
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +754,7 @@ GameObject:
   - component: {fileID: 4891059137687635061}
   - component: {fileID: 6458496419273275845}
   - component: {fileID: 1337465013038460959}
+  - component: {fileID: 1165177794308223106}
   m_Layer: 5
   m_Name: btn-social
   m_TagString: Untagged
@@ -807,6 +876,19 @@ MonoBehaviour:
           m_StringArgument: social
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1165177794308223106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362168088532883008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &5546245265349918312
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +901,7 @@ GameObject:
   - component: {fileID: 4891147247113179755}
   - component: {fileID: 4222025320710642459}
   - component: {fileID: 3767385880854552919}
+  - component: {fileID: 2196423453276261936}
   m_Layer: 5
   m_Name: btn-comunidades
   m_TagString: Untagged
@@ -940,6 +1023,19 @@ MonoBehaviour:
           m_StringArgument: comunidades
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2196423453276261936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546245265349918312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &6451883803582215348
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +1048,7 @@ GameObject:
   - component: {fileID: 49327859075552088}
   - component: {fileID: 7494115422234487027}
   - component: {fileID: 876767202202984981}
+  - component: {fileID: 8248886839031491584}
   m_Layer: 5
   m_Name: User
   m_TagString: Untagged
@@ -1073,6 +1170,19 @@ MonoBehaviour:
           m_StringArgument: perfil
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8248886839031491584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451883803582215348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &6677169944410171550
 GameObject:
   m_ObjectHideFlags: 0
