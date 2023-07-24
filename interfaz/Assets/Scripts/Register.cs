@@ -29,6 +29,7 @@ public class Register : MonoBehaviour
     void Start()
     {
         contrasenia.onValueChanged.AddListener(OnContraseniaValueChanged);
+        contrasenia.onValueChanged.AddListener(OnRContraseniaValueChanged);
         rcontrasenia.onValueChanged.AddListener(OnRContraseniaValueChanged);
         email.onValueChanged.AddListener(OnEmailValueChanged);
         edad.onValueChanged.AddListener(OnEdadValueChanged);
@@ -201,6 +202,7 @@ public class Register : MonoBehaviour
 
     private void OnRContraseniaValueChanged(string newValue)
     {
+        newValue.Trim();
 
         if (string.IsNullOrEmpty(newValue))
         {

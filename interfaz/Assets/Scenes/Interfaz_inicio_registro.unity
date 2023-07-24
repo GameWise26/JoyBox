@@ -790,8 +790,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225.91095, y: -0.000020981}
-  m_SizeDelta: {x: 45, y: 45}
+  m_AnchoredPosition: {x: 223.9, y: -0.000020981}
+  m_SizeDelta: {x: 46.8213, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &303249002
 MonoBehaviour:
@@ -871,7 +871,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 55c16703589e81a42b3bc121acbadfce, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1555,8 +1555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24.6612, y: 0}
-  m_SizeDelta: {x: -69.3225, y: -39.1199}
+  m_AnchoredPosition: {x: -28.8576, y: 0}
+  m_SizeDelta: {x: -77.7153, y: -39.1199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528127575
 MonoBehaviour:
@@ -2063,9 +2063,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 303249001}
   - {fileID: 528127574}
   - {fileID: 984338619}
-  - {fileID: 303249001}
   m_Father: {fileID: 352989477}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3411,6 +3411,7 @@ GameObject:
   - component: {fileID: 1281364851}
   - component: {fileID: 1281364850}
   - component: {fileID: 1281364852}
+  - component: {fileID: 1281364853}
   m_Layer: 5
   m_Name: linklog (1)
   m_TagString: Untagged
@@ -3591,6 +3592,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1281364853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281364848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01f6dc037c6e54da2e8ceccb937d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handCursorTexture: {fileID: 2800000, guid: 65322dd3588d90243ab36c9f3c745aed, type: 3}
 --- !u!1 &1333571554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4886,8 +4900,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.7971954, y: 0}
+  m_SizeDelta: {x: -7.5945, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746664865
 MonoBehaviour:
