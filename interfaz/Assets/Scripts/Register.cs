@@ -25,7 +25,6 @@ public class Register : MonoBehaviour
     public TMP_InputField usuario, contrasenia, email, rcontrasenia, edad;
     public TextMeshProUGUI msgbox, msgbox2, msgbox3, msgbox4, msgbox5, msgbox6;
     char[] CaracteresEspaciales = { '!', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~' };
-    private bool mostrarTextoContrasenia = false;
 
     void Start()
     {
@@ -58,11 +57,11 @@ public class Register : MonoBehaviour
 
         Formulario form = new Formulario
         {
-            nombre = usuario.text,
+            nombre = usuario.text.ToLower(),
             edad = edad.text,
             contrasenia = contrasenia.text,
             rcontrasenia = rcontrasenia.text,
-            correo = email.text 
+            correo = email.text.ToLower()
         };
         SocketManager.instancia.socket.Emit("registro", JsonConvert.SerializeObject(form));
     }
@@ -202,7 +201,6 @@ public class Register : MonoBehaviour
 
     private void OnRContraseniaValueChanged(string newValue)
     {
-        Debug.Log(contrasenia);
 
         if (string.IsNullOrEmpty(newValue))
         {
@@ -268,5 +266,4 @@ public class Register : MonoBehaviour
             msgbox2.text = "";
         }
     }
-
 }
