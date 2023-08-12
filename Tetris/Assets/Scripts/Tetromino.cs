@@ -10,6 +10,8 @@ public class Tetromino : MonoBehaviour
     public bool allowRotation = true;
     public bool limitRotation = false;
     public bool rectangulo = false;
+    private bool rote;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +48,24 @@ public class Tetromino : MonoBehaviour
 
     void Move(Vector3 direction)
     {
-        transform.position += direction;
+
+        transform.position += direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
 
         if (!CheckIsValidPosition())
         {
-            transform.position -= direction;
+            transform.position -= direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
+
+            FindObjectOfType<Game>().DeleteRow();
+
+            enabled = false;
+
+            FindObjectOfType<Game>().SpawnNextTetromino();
         }
+        else
+        {
+            FindObjectOfType<Game>().UpdateGrid(this);
+        }
+        rote = false;
     }
 
     void Rotate()
@@ -63,32 +77,31 @@ public class Tetromino : MonoBehaviour
         int rotationAngle = !limitRotation || (int)transform.eulerAngles.z == 90 ? 90 : -90;
 
         transform.Rotate(0, 0, rotationAngle);
-       
 
         if (!CheckIsValidPosition())
         {
             bool rotated = false;
 
-            // Try moving one unit to the right and rotate again
             if (CheckMoveValidity(Vector3.right))
             {
+                rote = true;
                 Move(Vector3.right);
                 rotated = true;
+
             }
-            // If it's still invalid, try moving one unit to the left and rotate again
+
             else if (CheckMoveValidity(Vector3.left))
             {
                 Move(Vector3.left);
                 rotated = true;
             }
-            // If the rotation is not possible after the possible horizontal moves, try moving up one unit and rotate again
+
             else if (CheckMoveValidity(Vector3.up))
             {
                 Move(Vector3.up);
                 rotated = true;
             }
 
-            // If the rotation is not possible after the possible moves, revert the rotation
             if (!rotated)
             {
                 transform.Rotate(0, 0, -rotationAngle);
@@ -100,11 +113,15 @@ public class Tetromino : MonoBehaviour
 
     bool CheckMoveValidity(Vector3 direction)
     {
-        transform.position += direction;
+        transform.position += direction + (rectangulo ? direction : Vector3.zero);
+
         bool isValid = CheckIsValidPosition();
-        transform.position -= direction;
+
+        transform.position -= direction + (rectangulo ? direction : Vector3.zero);
+
         return isValid;
     }
+
 
 
     bool CheckIsValidPosition()
@@ -114,6 +131,11 @@ public class Tetromino : MonoBehaviour
             Vector2 position = FindObjectOfType<Game>().Round(mino.position);
 
             if (FindObjectOfType<Game>().CheckIsInsideGrid(position) == false)
+            {
+                return false;
+            }
+
+            if (FindObjectOfType<Game>().GetTransformAtGridPosition(position) != null && FindObjectOfType<Game>().GetTransformAtGridPosition(position).parent != transform)
             {
                 return false;
             }

@@ -51,6 +51,7 @@ MonoBehaviour:
   fallspeed: 1
   allowRotation: 1
   limitRotation: 1
+  rectangulo: 1
 --- !u!1 &6081767726128477307
 GameObject:
   m_ObjectHideFlags: 0
