@@ -5,8 +5,7 @@ using UnityEngine;
 public class Tetromino : MonoBehaviour
 {
     float fall = 0;
-    public float fallspeed = 1;
-
+    public float fallspeed = 1f;
     public bool allowRotation = true;
     public bool limitRotation = false;
     public bool rectangulo = false;
@@ -30,10 +29,16 @@ public class Tetromino : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Vector3.right);
+            StartFastMove(Vector3.right);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(Vector3.left);
+            StartFastMove(Vector3.left);
+        }
+        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            StopFastMove();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -41,8 +46,54 @@ public class Tetromino : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - fall >= fallspeed)
         {
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                fallspeed = 0.1f;
+            }
+            else
+            {
+                fallspeed = 1f;
+            }
+
             Move(Vector3.down);
             fall = Time.time;
+        }
+    }
+
+    private Coroutine fastMoveCoroutine;
+
+    void StartFastMove(Vector3 direction)
+    {
+        if (fastMoveCoroutine != null)
+        {
+            StopCoroutine(fastMoveCoroutine);
+        }
+        fastMoveCoroutine = StartCoroutine(FastMove(direction));
+    }
+
+    void StopFastMove()
+    {
+        if (fastMoveCoroutine != null)
+        {
+            StopCoroutine(fastMoveCoroutine);
+        }
+    }
+
+    IEnumerator FastMove(Vector3 direction)
+    {
+        float moveInterval = 0.1f; // Cambioooooooo de velocidadddadad
+        float timer = 0f;
+
+        while (true)
+        {
+            if (timer >= moveInterval)
+            {
+                Move(direction);
+                timer = 0f;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -80,7 +131,6 @@ public class Tetromino : MonoBehaviour
 
     void Rotate()
     {
-
         if (!allowRotation)
             return;
 
