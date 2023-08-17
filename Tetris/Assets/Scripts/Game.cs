@@ -2,23 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Game : MonoBehaviour
 {
     public static int gridWidth = 10;
     public static int gridHeight = 20;
     public static Transform[,] grid = new Transform[gridWidth, gridHeight];
+    private Queue<string> tetrominoBag = new Queue<string>();
 
     void Start()
     {
+        FillTetrominoBag();
         SpawnNextTetromino();
     }
 
     void Update()
     {
-        
     }
 
-    public bool IsFullRowAt (int y)
+    void FillTetrominoBag()
+    {
+        string[] tetrominos = { "Tetromino_T", "Tetromino_I", "Tetromino_J", "Tetromino_L", "Tetromino_O", "Tetromino_S", "Tetromino_Z" };
+
+        List<string> tetrominoList = new List<string>(tetrominos);
+        while (tetrominoList.Count > 0)
+        {
+            int randomIndex = Random.Range(0, tetrominoList.Count);
+            tetrominoBag.Enqueue(tetrominoList[randomIndex]);
+            tetrominoList.RemoveAt(randomIndex);
+        }
+    }
+
+    public bool IsFullRowAt(int y)
     {
         for (int x = 0; x < gridWidth; ++x)
         {
@@ -28,7 +43,9 @@ public class Game : MonoBehaviour
             }
         }
 
-        return true;  
+        Debug.Log("IsFullRowAt: Fila llena");
+
+        return true;
     }
 
     public void DeleteMinoAt(int y)
@@ -37,6 +54,7 @@ public class Game : MonoBehaviour
         {
             Destroy(grid[x, y].gameObject);
             grid[x,y] = null;
+            Debug.Log($"DeleteMinoAt: Se elimino el mino en ({x},{y})");
         }
     }
 
@@ -51,6 +69,7 @@ public class Game : MonoBehaviour
                 grid[x, y - 1].position += new Vector3(0, -1, 0);
             }
         }
+        Debug.Log($"MoveRowDown: Fila bajada");
     }
 
     public void MoveAllRowsDown(int y)
@@ -59,6 +78,7 @@ public class Game : MonoBehaviour
         {
             MoveRowDown(i);
         }
+        Debug.Log($"MoveAllRowsDown: Filas bajadas");
     }
 
     public void DeleteRow()
@@ -69,7 +89,6 @@ public class Game : MonoBehaviour
             {
                 DeleteMinoAt(y);
                 MoveAllRowsDown(y + 1);
-
                 --y;
             }
         }
@@ -100,7 +119,7 @@ public class Game : MonoBehaviour
                 grid[(int)pos.x, (int)pos.y] = mino;
             }
         }
-
+        Debug.Log($"UpdateGrid: Se actualizo el grid");
     }
 
     public Transform GetTransformAtGridPosition(Vector2 pos)
@@ -117,7 +136,7 @@ public class Game : MonoBehaviour
 
     public void SpawnNextTetromino()
     {
-        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(GetRandomTetromino(), typeof(GameObject)), new Vector2(5.0f,20.0f), Quaternion.identity);
+        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(GetNextTetromino(), typeof(GameObject)), new Vector2(5.0f,20.0f), Quaternion.identity);
 
     }
 
@@ -131,35 +150,14 @@ public class Game : MonoBehaviour
         return new Vector2(Mathf.Round(position.x), Mathf.Round(position.y));
     }
 
-    string GetRandomTetromino()
+    string GetNextTetromino()
     {
-        int randomTetromino = Random.Range(1, 8);
-        string randomTetrominoName = "Prefabs/Tetromino_T";
-
-        switch (randomTetromino)
+        if (tetrominoBag.Count == 0)
         {
-            case 1:
-                randomTetrominoName = "Prefabs/Tetromino_T";
-                break;
-            case 2:
-                randomTetrominoName = "Prefabs/Tetromino_I";
-                break;
-            case 3:
-                randomTetrominoName = "Prefabs/Tetromino_J";
-                break;
-            case 4:
-                randomTetrominoName = "Prefabs/Tetromino_L";
-                break;
-            case 5:
-                randomTetrominoName = "Prefabs/Tetromino_O";
-                break;
-            case 6:
-                randomTetrominoName = "Prefabs/Tetromino_S";
-                break;
-            case 7:
-                randomTetrominoName = "Prefabs/Tetromino_Z";
-                break;
+            FillTetrominoBag();
         }
-        return randomTetrominoName;
+
+        return "Prefabs/" + tetrominoBag.Dequeue();
     }
+
 }

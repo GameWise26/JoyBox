@@ -48,25 +48,35 @@ public class Tetromino : MonoBehaviour
 
     void Move(Vector3 direction)
     {
-
         transform.position += direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
 
-        if (!CheckIsValidPosition())
-        {
-            transform.position -= direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
-
-            FindObjectOfType<Game>().DeleteRow();
-
-            enabled = false;
-
-            FindObjectOfType<Game>().SpawnNextTetromino();
-        }
-        else
+        if (CheckIsValidPosition())
         {
             FindObjectOfType<Game>().UpdateGrid(this);
         }
-        rote = false;
+        else
+        {
+            transform.position -= direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
+            rote = false;
+
+            if (direction == Vector3.down)
+            {
+
+                for (int yMino = 0; yMino < 20; yMino++  )
+                {
+                    if (FindObjectOfType<Game>().IsFullRowAt(yMino))
+                    {
+                        Debug.Log("Se encontro fila completa");
+                        FindObjectOfType<Game>().DeleteRow();
+                    }
+                }
+
+                enabled = false;
+                FindObjectOfType<Game>().SpawnNextTetromino();
+            }
+        }
     }
+
 
     void Rotate()
     {
@@ -121,8 +131,6 @@ public class Tetromino : MonoBehaviour
 
         return isValid;
     }
-
-
 
     bool CheckIsValidPosition()
     {
