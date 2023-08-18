@@ -1216,6 +1216,7 @@ MonoBehaviour:
   botonImage: {fileID: 303249003}
   ojoAbiertoSprite: {fileID: 21300000, guid: 061429bb38889304a9dc052c34cda34f, type: 3}
   ojoCerradoSprite: {fileID: 21300000, guid: 55c16703589e81a42b3bc121acbadfce, type: 3}
+  isRegister: 1
 --- !u!1 &352989476
 GameObject:
   m_ObjectHideFlags: 0
