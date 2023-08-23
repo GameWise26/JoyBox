@@ -12,6 +12,7 @@ public class Tetromino : MonoBehaviour
     private bool rote;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,17 +30,17 @@ public class Tetromino : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Vector3.right);
-            StartFastMove(Vector3.right);
+           //StartFastMove(Vector3.right);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(Vector3.left);
-            StartFastMove(Vector3.left);
+            //StartFastMove(Vector3.left);
         }
-        else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        /*else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
             StopFastMove();
-        }
+        }*/
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Rotate();
@@ -60,9 +61,9 @@ public class Tetromino : MonoBehaviour
         }
     }
 
-    private Coroutine fastMoveCoroutine;
+    //private Coroutine fastMoveCoroutine;
 
-    void StartFastMove(Vector3 direction)
+    /*void StartFastMove(Vector3 direction)
     {
         if (fastMoveCoroutine != null)
         {
@@ -95,7 +96,7 @@ public class Tetromino : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-    }
+    }*/
 
     void Move(Vector3 direction)
     {
@@ -134,7 +135,7 @@ public class Tetromino : MonoBehaviour
         if (!allowRotation)
             return;
 
-        int rotationAngle = !limitRotation || (int)transform.eulerAngles.z == 90 ? 90 : -90;
+        int rotationAngle = !limitRotation || (int)transform.eulerAngles.z == 90 ? -90 : 90; 
 
         transform.Rotate(0, 0, rotationAngle);
 
@@ -167,6 +168,10 @@ public class Tetromino : MonoBehaviour
                 transform.Rotate(0, 0, -rotationAngle);
                 Debug.Log("Se rechazo la rotacion");
             }
+        }
+        foreach (Transform mino in transform)
+        {
+            mino.Rotate(0, 0, -rotationAngle);
         }
     }
 
