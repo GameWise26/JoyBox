@@ -11,8 +11,6 @@ public class Tetromino : MonoBehaviour
     public bool rectangulo = false;
     private bool rote;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,17 +28,11 @@ public class Tetromino : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             Move(Vector3.right);
-           //StartFastMove(Vector3.right);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(Vector3.left);
-            //StartFastMove(Vector3.left);
         }
-        /*else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            StopFastMove();
-        }*/
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Rotate();
@@ -61,43 +53,6 @@ public class Tetromino : MonoBehaviour
         }
     }
 
-    //private Coroutine fastMoveCoroutine;
-
-    /*void StartFastMove(Vector3 direction)
-    {
-        if (fastMoveCoroutine != null)
-        {
-            StopCoroutine(fastMoveCoroutine);
-        }
-        fastMoveCoroutine = StartCoroutine(FastMove(direction));
-    }
-
-    void StopFastMove()
-    {
-        if (fastMoveCoroutine != null)
-        {
-            StopCoroutine(fastMoveCoroutine);
-        }
-    }
-
-    IEnumerator FastMove(Vector3 direction)
-    {
-        float moveInterval = 0.1f; // Cambioooooooo de velocidadddadad
-        float timer = 0f;
-
-        while (true)
-        {
-            if (timer >= moveInterval)
-            {
-                Move(direction);
-                timer = 0f;
-            }
-
-            timer += Time.deltaTime;
-            yield return null;
-        }
-    }*/
-
     void Move(Vector3 direction)
     {
         transform.position += direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
@@ -113,22 +68,20 @@ public class Tetromino : MonoBehaviour
 
             if (direction == Vector3.down)
             {
-
-                for (int yMino = 0; yMino < 20; yMino++  )
+                Debug.Log("Toco suelo");
+                for (int yMino = 0; yMino < 20; yMino++)
                 {
                     if (FindObjectOfType<Game>().IsFullRowAt(yMino))
                     {
-                        Debug.Log("Se encontro fila completa");
                         FindObjectOfType<Game>().DeleteRow();
                     }
                 }
 
-                enabled = false;
+                enabled = false; 
                 FindObjectOfType<Game>().SpawnNextTetromino();
             }
         }
     }
-
 
     void Rotate()
     {
@@ -166,7 +119,6 @@ public class Tetromino : MonoBehaviour
             if (!rotated)
             {
                 transform.Rotate(0, 0, -rotationAngle);
-                Debug.Log("Se rechazo la rotacion");
             }
         }
         foreach (Transform mino in transform)

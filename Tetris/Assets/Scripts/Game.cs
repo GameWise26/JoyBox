@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -9,6 +11,9 @@ public class Game : MonoBehaviour
     public static int gridHeight = 20;
     public static Transform[,] grid = new Transform[gridWidth, gridHeight];
     private Queue<string> tetrominoBag = new Queue<string>();
+    private List<string> listTetrominos = new List< string>();
+    public List<SpriteRenderer> NextPanel = new List<SpriteRenderer>();
+    public List<Sprite> spritesTetrominos= new List<Sprite>();
 
     void Start()
     {
@@ -43,8 +48,6 @@ public class Game : MonoBehaviour
             }
         }
 
-        Debug.Log("IsFullRowAt: Fila llena");
-
         return true;
     }
 
@@ -54,7 +57,6 @@ public class Game : MonoBehaviour
         {
             Destroy(grid[x, y].gameObject);
             grid[x,y] = null;
-            Debug.Log($"DeleteMinoAt: Se elimino el mino en ({x},{y})");
         }
     }
 
@@ -69,7 +71,6 @@ public class Game : MonoBehaviour
                 grid[x, y - 1].position += new Vector3(0, -1, 0);
             }
         }
-        Debug.Log($"MoveRowDown: Fila bajada");
     }
 
     public void MoveAllRowsDown(int y)
@@ -78,7 +79,6 @@ public class Game : MonoBehaviour
         {
             MoveRowDown(i);
         }
-        Debug.Log($"MoveAllRowsDown: Filas bajadas");
     }
 
     public void DeleteRow()
@@ -119,7 +119,6 @@ public class Game : MonoBehaviour
                 grid[(int)pos.x, (int)pos.y] = mino;
             }
         }
-        Debug.Log($"UpdateGrid: Se actualizo el grid");
     }
 
     public Transform GetTransformAtGridPosition(Vector2 pos)
@@ -136,8 +135,33 @@ public class Game : MonoBehaviour
 
     public void SpawnNextTetromino()
     {
-        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(GetNextTetromino(), typeof(GameObject)), new Vector2(5.0f,20.0f), Quaternion.identity);
+        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(ListTetrominos()[0], typeof(GameObject)), new Vector2(5.0f,18.0f), Quaternion.identity);
 
+    }
+
+    public List<string> ListTetrominos()
+    {
+        
+        if (listTetrominos.Count == 0) {
+            Debug.Log("Llenando lista");
+            for (int i = 0; i < 6; i++)
+            {
+                listTetrominos.Add(GetNextTetromino());
+            }
+        }
+        else
+        {
+            Debug.Log("Remover agregar");
+            listTetrominos.RemoveAt(0);
+            listTetrominos.Add(GetNextTetromino());
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            NextPanel[i].sprite = spritesTetrominos.FirstOrDefault(s => s.name[s.name.Length - 1] == listTetrominos[i + 1][listTetrominos[i + 1].Length - 1]);
+        }
+
+        return listTetrominos;
     }
 
     public bool CheckIsInsideGrid(Vector2 position)
