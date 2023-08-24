@@ -1,17 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CartaBehavior : MonoBehaviour
 {
-    private bool isSelected = false;
     private bool isMoving = false;
+    private Vector3 originalPosition;
+    private float targetHeight = 0.0f;
+    private bool isRevealed = false;
+    private SpriteRenderer spriteRenderer;
+
+    public Carta carta; // Agregar propiedad para almacenar la carta
+
+    public float TargetHeight
+    {
+        get { return targetHeight; }
+        set { targetHeight = value; }
+    }
 
     private GameManager gameManager;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        originalPosition = transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public bool IsMoving
@@ -25,27 +36,46 @@ public class CartaBehavior : MonoBehaviour
         if (isMoving)
         {
             float step = 5.0f * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, gameManager.PosicionDeseada, step);
+            Vector3 targetPosition = originalPosition + Vector3.up * targetHeight;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
-            if (transform.position == gameManager.PosicionDeseada)
+            if (transform.position == targetPosition)
             {
                 isMoving = false;
-                gameManager.CardArrived();
             }
         }
     }
 
-    private void OnMouseDown()
+private void OnMouseDown()
+{
+    if (!IsMoving && !isRevealed)
     {
-        if (!isSelected)
+        IsMoving = true;
+        gameManager.MoveCardUp(this);
+
+        // Revelar la carta
+        isRevealed = true;
+        int index = gameManager.cartasGameObject.IndexOf(gameObject); // Obtener el índice en cartasGameObject
+        if (index != -1 && index < gameManager.cartas.Count)
         {
-            isSelected = true;
-            gameManager.MoveCardToCenter(this);
+            Carta carta = gameManager.cartas[index];
+            spriteRenderer.sprite = carta.sprite;
+
+            // Muestra el valor y el palo en la consola
+            Debug.Log("Valor: " + carta.valor + ", Palo: " + carta.palo);
         }
         else
         {
-            isMoving = true;
+            Debug.LogError("No se pudo encontrar la carta en CartaBehavior.");
         }
     }
+}
+
+
+
+
+
+
+
 }
 

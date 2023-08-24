@@ -1,64 +1,191 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum Palo
+{
+    Espada,
+    Basto,
+    Copa,
+    Oro
+}
+
+public enum Valor
+{
+    Uno,
+    Dos,
+    Tres,
+    Cuatro,
+    Cinco,
+    Seis,
+    Siete,
+    Diez,
+    Once,
+    Doce
+}
+
+[System.Serializable]
+public class Carta
+{
+    public Sprite sprite;
+    public Palo palo;
+    public Valor valor;
+}
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] cartaPrefabArray;
-    public Carta[] imagenesDeCartas;
-
-    private List<GameObject> cartas;
+    public GameObject cartaPrefab;
+    public List<Carta> cartas;
 
     public float espacioHorizontal = 2.0f;
     public float espacioVertical = 2.0f;
     public float separacionEntreGrupos = 1.0f;
-
     private Vector3 _posicionDeseada = new Vector3(0.0f, -4.93f, 0.0f);
     public Vector3 PosicionDeseada => _posicionDeseada;
-
     private bool allCardsArrived = false;
     private GameObject lastArrivedCard = null;
 
+    public List<GameObject> cartasGameObject = new List<GameObject>();
+    public Dictionary<Carta, Sprite> cartaSpriteDict = new Dictionary<Carta, Sprite>(); // Diccionario para asociar cartas con sprites
+    public static GameManager Instance { get; private set; }
+
+    public List<Carta> GetCartasBarajadas()
+    {
+        List<Carta> cartasBarajadas = new List<Carta>();
+        for (int i = 0; i < cartasGameObject.Count; i++)
+        {
+            cartasBarajadas.Add(cartas[i]);
+        }
+        return cartasBarajadas;
+    }
+
+    public List<Carta> GetManoJugador1()
+    {
+        List<Carta> mano = new List<Carta>();
+        for (int i = 0; i < 3; i++)
+        {
+            mano.Add(cartas[i]);
+        }
+        return mano;
+    }
+
+    public List<Carta> GetManoJugador2()
+    {
+        List<Carta> mano = new List<Carta>();
+        for (int i = 3; i < 6; i++)
+        {
+            mano.Add(cartas[i]);
+        }
+        return mano;
+    }
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        cartas = new List<GameObject>();
+       DestruirCartasAnteriores();
+       RealizarInicio();
+    }
+
+    public void RealizarInicio()
+    {
+        cartasGameObject = new List<GameObject>();
         GenerarYBarajarCartas();
         RepartirCartas();
 
         for (int i = 3; i < 6; i++)
         {
-            cartas[i].AddComponent<CartaBehavior>();
+            cartasGameObject[i].AddComponent<CartaBehavior>();
         }
     }
 
-    void GenerarYBarajarCartas()
+    public void DestruirCartasAnteriores()
     {
-        for (int i = imagenesDeCartas.Length - 1; i > 0; i--)
+        foreach (var carta in cartasGameObject)
         {
-            int j = Random.Range(0, i + 1);
-            Carta temp = imagenesDeCartas[i];
-            imagenesDeCartas[i] = imagenesDeCartas[j];
-            imagenesDeCartas[j] = temp;
+            Destroy(carta);
+        }
+        cartasGameObject.Clear();
+    }
+
+   public void GenerarYBarajarCartas()
+{
+    // Limpiar listas y diccionario antes de generar nuevas cartas
+    cartasGameObject.Clear();
+    cartaSpriteDict.Clear();
+
+    for (int i = cartas.Count - 1; i > 0; i--)
+    {
+        int j = Random.Range(0, i + 1);
+        Carta temp = cartas[i];
+        cartas[i] = cartas[j];
+        cartas[j] = temp;
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        GameObject nuevaCarta = Instantiate(cartaPrefab, Vector3.zero, Quaternion.identity);
+        SpriteRenderer spriteRenderer = nuevaCarta.GetComponent<SpriteRenderer>();
+
+        if (i < 3)
+        {
+            // Escala diferente para las primeras tres cartas (0, 1, 2)
+            nuevaCarta.transform.localScale = new Vector3(0.742592f, 0.8768119f, 1f);
+            nuevaCarta.name = "Carta " + i;
+        }
+        else
+        {
+            nuevaCarta.transform.localScale = new Vector3(1.64f, 1.66f, 1f);
+            spriteRenderer.sprite = cartas[i].sprite;
+
+            // Agregar o ajustar el único BoxCollider2D
+            BoxCollider2D boxCollider = nuevaCarta.GetComponent<BoxCollider2D>();
+            if (boxCollider == null)
+            {
+                boxCollider = nuevaCarta.AddComponent<BoxCollider2D>();
+            }
+
+            // Establecer offset y tamaño específicos
+            boxCollider.offset = new Vector2(0.007541239f, 0.01489973f);
+            boxCollider.size = new Vector2(2.033966f, 3.258996f);
         }
 
-        for (int i = 0; i < 6; i++)
+        cartasGameObject.Add(nuevaCarta);
+
+        // Agregar el sprite al diccionario
+        if (!cartaSpriteDict.ContainsKey(cartas[i]))
         {
-            GameObject nuevaCarta = Instantiate(cartaPrefabArray[i], Vector3.zero, Quaternion.identity);
-            nuevaCarta.transform.localScale = new Vector3(1.64f, 1.66f, 1f);
-            SpriteRenderer spriteRenderer = nuevaCarta.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = imagenesDeCartas[i].sprite;
-            cartas.Add(nuevaCarta);
+            cartaSpriteDict.Add(cartas[i], spriteRenderer.sprite);
+        }
+
+        // Asignar la carta al comportamiento de la carta
+        CartaBehavior cartaBehavior = nuevaCarta.GetComponent<CartaBehavior>();
+        if (cartaBehavior != null)
+        {
+            cartaBehavior.carta = cartas[i];
         }
     }
+}
+
+
 
     void RepartirCartas()
     {
-        int totalCartas = cartas.Count;
+        int totalCartas = cartasGameObject.Count;
         int cartasPorGrupo = totalCartas / 2;
         float offsetTop = ((cartasPorGrupo - 1) * espacioHorizontal) / 2;
         float offsetBottom = ((cartasPorGrupo - 1) * espacioHorizontal) / 2;
 
-        float yOffsetTop = 7.0f; 
-        float yOffsetBottom = -11.0f; 
+        float yOffsetTop = 7.0f;
+        float yOffsetBottom = -11.0f;
 
         for (int i = 0; i < totalCartas; i++)
         {
@@ -76,34 +203,30 @@ public class GameManager : MonoBehaviour
                 y = yOffsetBottom;
             }
 
-            cartas[i].transform.position = new Vector3(x, y, i * separacionEntreGrupos);
+            cartasGameObject[i].transform.position = new Vector3(x, y, i * separacionEntreGrupos);
         }
     }
-
-    public void MoveCardToCenter(CartaBehavior cardBehavior)
+    public void MoveCardUp(CartaBehavior cardBehavior)
     {
-        if (!allCardsArrived)
-            return;
-
-        foreach (var carta in cartas)
+        foreach (var carta in cartasGameObject)
         {
             if (carta.GetComponent<CartaBehavior>() == cardBehavior)
             {
                 cardBehavior.IsMoving = true;
-                lastArrivedCard = carta;
+                cardBehavior.TargetHeight = 2.0f; // Cambia el valor según lo necesario
             }
             else if (lastArrivedCard != null)
             {
-                carta.transform.position = new Vector3(lastArrivedCard.transform.position.x, lastArrivedCard.transform.position.y - 0.1f, lastArrivedCard.transform.position.z);
-                lastArrivedCard = carta;
+                Vector3 targetPosition = carta.transform.position + Vector3.up * 2.0f; // Cambia el 2.0f según lo necesario
+                carta.transform.position = Vector3.Lerp(carta.transform.position, targetPosition, Time.deltaTime * 5.0f); // Cambia la velocidad de desplazamiento según lo necesario
             }
         }
     }
 
     public void CardArrived()
     {
-        int arrivedCount = cartas.FindAll(carta => carta != null && carta.GetComponent<CartaBehavior>() != null && !carta.GetComponent<CartaBehavior>().IsMoving).Count;
-        if (arrivedCount == cartas.Count)
+        int arrivedCount = cartasGameObject.FindAll(carta => carta != null && carta.GetComponent<CartaBehavior>() != null && !carta.GetComponent<CartaBehavior>().IsMoving).Count;
+        if (arrivedCount == cartasGameObject.Count)
         {
             allCardsArrived = true;
             ReorderCards();
@@ -112,7 +235,7 @@ public class GameManager : MonoBehaviour
 
     void ReorderCards()
     {
-        int totalCartas = cartas.Count;
+        int totalCartas = cartasGameObject.Count;
         float offsetCenter = ((totalCartas - 1) * espacioHorizontal) / 2;
 
         for (int i = 0; i < totalCartas; i++)
@@ -120,89 +243,42 @@ public class GameManager : MonoBehaviour
             float x = -offsetCenter + i * espacioHorizontal;
             float y = -4.93f; // Posición vertical en el centro
 
-            cartas[i].transform.position = new Vector3(x, y, i * separacionEntreGrupos);
+            cartasGameObject[i].transform.position = new Vector3(x, y, i * separacionEntreGrupos);
         }
     }
 
-void Update()
-{
-    if (allCardsArrived)
+    void Update()
     {
-        bool allCardsArrived = true;
-        foreach (var carta in cartas)
-        {
-            if (carta != null && carta.GetComponent<CartaBehavior>() != null && carta.GetComponent<CartaBehavior>().IsMoving)
-            {
-                allCardsArrived = false;
-                break;
-            }
-        }
         if (allCardsArrived)
         {
-            ReorderCards();
+            bool allCardsArrived = true;
+            foreach (var carta in cartasGameObject)
+            {
+                if (carta != null && carta.GetComponent<CartaBehavior>() != null && carta.GetComponent<CartaBehavior>().IsMoving)
+                {
+                    allCardsArrived = false;
+                    break;
+                }
+            }
+            if (allCardsArrived)
+            {
+                ReorderCards();
+            }
         }
     }
-}
 
-[System.Serializable]
-public class Carta
+    public Sprite GetSpriteForCard(Carta carta)
 {
-    public Sprite sprite;
-    public Palo palo;
-    public Valor valor;
-    public int peso; 
-
-    public Carta(Sprite sprite, Palo palo, Valor valor)
+    if (cartaSpriteDict.ContainsKey(carta))
     {
-        this.sprite = sprite;
-        this.palo = palo;
-        this.valor = valor;
-        switch (valor)
-        {
-            case Valor.Uno:
-                if (palo == Palo.Copa || palo == Palo.Oro)
-                    peso = 8;
-                else if(palo == Palo.Basto )
-                    peso = 500;
-                else
-                    peso = 1000;
-                break;
-            case Valor.Siete:
-                if (palo == Palo.Copa || palo == Palo.Basto)
-                    peso = 4;
-                else if(palo == Palo.Oro)
-                    peso = 200;
-                else
-                    peso = 300;
-                break;
-            case Valor.Tres:
-                peso = 10;
-                break;
-            case Valor.Dos:
-                peso = 9;
-                break;
-            case Valor.Doce:
-                peso = 7;
-                break;
-            case Valor.Once:
-                peso = 6;
-                break;
-            case Valor.Diez:
-                peso = 5;
-                break;
-            case Valor.Seis:
-                peso = 3;
-                break;
-            case Valor.Cinco:
-                peso = 2;
-                break;
-            case Valor.Cuatro:
-                peso = 1;
-                break;
-            default:
-                peso = 0;
-                break;
-        }
+        return cartaSpriteDict[carta];
     }
+    return null; // O un sprite por defecto en caso de no encontrar la carta
+}
+
+public int GetIndexOfCard(GameObject cartaObject)
+{
+    return cartasGameObject.IndexOf(cartaObject);
 }
 }
+
