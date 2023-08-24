@@ -15,7 +15,7 @@ class Nombre{
 }
 public class Login : MonoBehaviour
 {
-    public TextMeshProUGUI usuario, contrasenia;
+    public TextMeshProUGUI usuario, contrasenia, MsgBoxError;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +27,14 @@ public class Login : MonoBehaviour
                 SocketManager.instancia.nombre = res["nombre"];
                 SceneManager.LoadScene("interfaz_home");
             }
-            else{
-                Debug.Log("Error: "+response);
+            else if(res["exito"] == "EnUso"){
+                MsgBoxError.text = "La cuenta a la que intentas acceder ya se encuentra en uso actualmente";
+            }
+            else if(res["exito"] == "CI"){
+                MsgBoxError.text = "El usuario o la contraseña son incorrectos";
+            }
+            else if(res["exito"] == "IX"){
+                MsgBoxError.text = "Error inesperado. Vuelva a intentarlo mas tarde";
             }
         });
         SocketManager.instancia.socket.OnUnityThread("camigos", (response) =>{
@@ -37,10 +43,6 @@ public class Login : MonoBehaviour
         });
     }
     public void Enviar(){
-        Iniciar form = new Iniciar{
-            nombre = usuario.text,
-            contrasenia = contrasenia.text
-        };
-        SocketManager.instancia.socket.Emit("login",JsonConvert.SerializeObject(form));
+        SocketManager.instancia.socket.Emit("login",new {datos = new string[]{usuario.text,contrasenia.text}});
     }
 }

@@ -37,16 +37,17 @@ public class Register : MonoBehaviour
 
         SocketManager.instancia.socket.OnUnityThread("registro", (response) =>
         {
-            Dictionary<string, bool> res = JsonConvert.DeserializeObject<Dictionary<string, bool>>(response.ToString().Split('[')[1].Split(']')[0]);
+            Debug.Log(response);
+            Dictionary<string, string> res = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.ToString().Split('[')[1].Split(']')[0]);
 
-            if (res.ContainsKey("exito")) msgbox.text = "Se registro correctamente, ahora inicie sesión";
-            else if (res.ContainsKey("EyN"))
+            if (res["msg"] == "exito") msgbox.text = "Se registro correctamente, ahora inicie sesiï¿½n";
+            else if (res["msg"] == "EyN")
             {
-                msgbox3.text = "El correo ingresado está en uso";
-                msgbox6.text = "El usuario ingresado está en uso";
+                msgbox3.text = "El correo ingresado estï¿½ en uso";
+                msgbox6.text = "El usuario ingresado estï¿½ en uso";
             }
-            else if (res.ContainsKey("email")) msgbox3.text = "El correo ingresado está en uso";
-            else if (res.ContainsKey("nombre")) msgbox6.text = "El usuario ingresado está en uso";
+            else if (res["msg"] == "email") msgbox3.text = "El correo ingresado estï¿½ en uso";
+            else if (res["msg"] == "nombre") msgbox6.text = "El usuario ingresado estï¿½ en uso";
             else msgbox.text = "No se pudo registrar, verifique los datos ingresados";
         });
     }
@@ -55,16 +56,7 @@ public class Register : MonoBehaviour
     {
         if (!ValidarDatos())
             return;
-
-        Formulario form = new Formulario
-        {
-            nombre = usuario.text.ToLower(),
-            edad = edad.text,
-            contrasenia = contrasenia.text,
-            rcontrasenia = rcontrasenia.text,
-            correo = email.text.ToLower()
-        };
-        SocketManager.instancia.socket.Emit("registro", JsonConvert.SerializeObject(form));
+        SocketManager.instancia.socket.Emit("registro", new {datos = new string[]{usuario.text.ToLower(),edad.text,contrasenia.text,rcontrasenia.text,email.text.ToLower()}});
     }
 
     private bool ValidarDatos()
@@ -84,25 +76,25 @@ public class Register : MonoBehaviour
 
         if (!int.TryParse(Regex.Replace(edad.text.Trim(), "[^0-9]", ""), out int edadNum) || edadNum > 99 || edadNum < 5)
         {
-            //msgbox.text = "Ingrese una edad válida";
+            //msgbox.text = "Ingrese una edad vï¿½lida";
             return false;
         }
 
         if (ValidarFormatoCorreo(email.text) == false)
         {
-            //msgbox.text = "Formato de correo electrónico inválido";
+            //msgbox.text = "Formato de correo electrï¿½nico invï¿½lido";
             return false;
         }
 
         if (ValidarSeguridadContrasenia(contrasenia.text).Any(c => c != null))
         {
-            //msgbox.text = $"La contraseña al menos debe tener: {string.Join(", ", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
+            //msgbox.text = $"La contraseï¿½a al menos debe tener: {string.Join(", ", ValidarSeguridadContrasenia(contrasenia.text).Where(c => c != null))}";
             return false;
         }
 
         if (contrasenia.text != rcontrasenia.text)
         {
-            //msgbox.text = "Las contraseñas no coinciden";
+            //msgbox.text = "Las contraseï¿½as no coinciden";
             return false;
         }
 
@@ -154,9 +146,9 @@ public class Register : MonoBehaviour
         contrasenia = contrasenia.Trim();
 
         string[] sugerencias = {
-        Regex.IsMatch(contrasenia, @"[A-Z]") ? null : "Una mayúscula",
-        Regex.IsMatch(contrasenia, @"[a-z]") ? null : "Una minúscula",
-        Regex.IsMatch(contrasenia, @"\d") ? null : "Un número",
+        Regex.IsMatch(contrasenia, @"[A-Z]") ? null : "Una mayï¿½scula",
+        Regex.IsMatch(contrasenia, @"[a-z]") ? null : "Una minï¿½scula",
+        Regex.IsMatch(contrasenia, @"\d") ? null : "Un nï¿½mero",
         contrasenia.Any(c => CaracteresEspaciales.Contains(c)) ? null : "Un caracter especial",
         contrasenia.Length >= 9 && contrasenia.Length <= 20 ? null : "Entre 9 y 20 caracteres"
     };
@@ -192,7 +184,7 @@ public class Register : MonoBehaviour
         }
         else if (!int.TryParse(Regex.Replace(newValue.Trim(), "[^0-9]", ""), out int edadNum) || edadNum > 99 || edadNum < 5)
         {
-            msgbox5.text = "Ingrese una edad válida";
+            msgbox5.text = "Ingrese una edad vï¿½lida";
         }
         else
         {
@@ -210,7 +202,7 @@ public class Register : MonoBehaviour
         }
         else if (contrasenia.text != rcontrasenia.text)
         {
-            msgbox4.text = "Las contraseñas no coinciden";
+            msgbox4.text = "Las contraseï¿½as no coinciden";
         }        
         else
         {
@@ -227,7 +219,7 @@ public class Register : MonoBehaviour
         }
         else if (!ValidarFormatoCorreo(newValue))
         {
-            msgbox3.text = "Formato de correo electrónico inválido";
+            msgbox3.text = "Formato de correo electrï¿½nico invï¿½lido";
         }
         else
         {
@@ -245,23 +237,23 @@ public class Register : MonoBehaviour
         }
         else if (!Regex.IsMatch(newValue, @"[A-Z]"))
         {
-            msgbox2.text = "La contraseña al menos debe tener una mayúscula";
+            msgbox2.text = "La contraseï¿½a al menos debe tener una mayï¿½scula";
         }
         else if (!Regex.IsMatch(newValue, @"[a-z]"))
         {
-            msgbox2.text = "La contraseña al menos debe tener una minuscula";
+            msgbox2.text = "La contraseï¿½a al menos debe tener una minuscula";
         }
         else if (!newValue.Any(c => CaracteresEspaciales.Contains(c)))
         {
-            msgbox2.text = "La contraseña al menos debe tener un caracter especial";
+            msgbox2.text = "La contraseï¿½a al menos debe tener un caracter especial";
         }
         else if (!Regex.IsMatch(newValue, @"\d"))
         {
-            msgbox2.text = "La contraseña al menos debe tener un número";
+            msgbox2.text = "La contraseï¿½a al menos debe tener un nï¿½mero";
         }
         else if (newValue.Length < 9 || newValue.Length > 20)
         {
-            msgbox2.text = "La contraseña al menos debe tener entre 9 y 20 caracteres";
+            msgbox2.text = "La contraseï¿½a al menos debe tener entre 9 y 20 caracteres";
         }
         else
         {

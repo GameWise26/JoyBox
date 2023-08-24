@@ -12,18 +12,14 @@ public class NewBehaviourScript : MonoBehaviour
     public Image botonImage;
     public Sprite ojoAbiertoSprite;
     public Sprite ojoCerradoSprite;
-    public bool isRegister = true;
     private bool showPassword = false;
 
     public void BotonCambioEstado()
     {
         showPassword = !showPassword;
         CambiarVisibilidad(contraseniaInputField);
-        if (isRegister != false)
-        {
-            CambiarVisibilidad(rcontraseniaInputField);
-            CambiarVisibilidad(confirmarInputField);
-        }
+        CambiarVisibilidad(rcontraseniaInputField);
+        CambiarVisibilidad(confirmarInputField);
         CambiarImagenBoton();
     }
 

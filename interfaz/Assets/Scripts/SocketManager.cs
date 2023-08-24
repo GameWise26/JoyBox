@@ -20,7 +20,7 @@ public class SocketManager : MonoBehaviour
 
     //Datos del usuario
     public string nombre;
-    public List<string> amigos;
+    public List<string> amigos = new List<string>(){};
     public string juego;
     public bool salirJuego;
     public int flappyPuntos;
@@ -45,8 +45,8 @@ public class SocketManager : MonoBehaviour
     {
         salirJuego = false;
         //TODO: check the Uri if Valid.
-        var uri = new Uri("https://joyboxapp.onrender.com");
-        //var uri = new Uri("http://localhost:3000");
+        //var uri = new Uri("https://joyboxapp.onrender.com");
+        var uri = new Uri("http://localhost:3000");
         socket = new SocketIOUnity(uri, new SocketIOOptions
         {
             Query = new Dictionary<string, string>
@@ -107,5 +107,8 @@ public class SocketManager : MonoBehaviour
     }
     public Dictionary<string,string> pasarDict(SocketIOResponse response){
         return JsonConvert.DeserializeObject<Dictionary<string,string>>(response.ToString().Substring(1,response.ToString().Length-2));
+    }
+    public List<string> pasarLista(SocketIOResponse response){
+        return JsonConvert.DeserializeObject<List<string>>(response.ToString().Substring(1,response.ToString().Length-2));
     }
 }

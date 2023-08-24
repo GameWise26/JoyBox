@@ -45,7 +45,7 @@ public class TraerChat : MonoBehaviour
                 f.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = miMsg;
             }
         });
-        SocketManager.instancia.Emit("mensajes",new Dictionary<string,string>(){{"id",SocketManager.instancia.id_chat}});
+        SocketManager.instancia.socket.Emit("mensajes",new {datos = new string[]{SocketManager.instancia.id_chat}});
         nombre.text = SocketManager.instancia.nombre_chat;
         rt = GetComponent<RectTransform>();
         prt = rt.sizeDelta;
@@ -54,15 +54,14 @@ public class TraerChat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Return)){
+        /*if(Input.GetKeyUp(KeyCode.Return)){
             dx = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Return) && xd && dx)
+        }*/
+        if (Input.GetKeyUp(KeyCode.Return) && xd)
         {
             miMsg = msg.text;
             msg.text = "";
-            dx = false;
-            SocketManager.instancia.Emit("mandar",new Dictionary<string,string>(){{"id",SocketManager.instancia.id_chat},{"msg",miMsg}});
+            SocketManager.instancia.socket.Emit("mandar",new {datos = new string[]{SocketManager.instancia.id_chat,miMsg}});
         }
         if(prt != rt.sizeDelta){
             prt =  rt.sizeDelta;

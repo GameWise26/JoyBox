@@ -38,9 +38,9 @@ public class GameController1 : MonoBehaviour
     void Start()
     {
         SocketManager.instancia.Emit("fentro", new Dictionary<string,string>(){{"id",SocketManager.instancia.id_espec}});
-        /*SocketManager.instancia.OnUnityThread("finicio",(response)=>{
-            Bird1.instance.
-        });*/
+        SocketManager.instancia.socket.OnUnityThread("salidas",(response)=>{
+            //Bird1.instance.
+        });
     }
 
 

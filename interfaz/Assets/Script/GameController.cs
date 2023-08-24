@@ -55,6 +55,10 @@ public class GameController : MonoBehaviour
         else{
             recordText.text = "Record: " + SocketManager.instancia.flappyPuntos;
         }
+        SocketManager.instancia.socket.OnUnityThread("valores",(response)=>{
+            
+            //SocketManager.instancia.Emit("");
+        });
     }
 
 
