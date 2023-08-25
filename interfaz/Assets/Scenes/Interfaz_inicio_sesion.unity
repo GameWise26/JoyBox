@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: Usuario
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1941,7 +1941,6 @@ MonoBehaviour:
   botonImage: {fileID: 1005091212}
   ojoAbiertoSprite: {fileID: 21300000, guid: 061429bb38889304a9dc052c34cda34f, type: 3}
   ojoCerradoSprite: {fileID: 21300000, guid: 55c16703589e81a42b3bc121acbadfce, type: 3}
-  isRegister: 0
 --- !u!114 &1005091211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,7 +1987,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1005091210}
         m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
-        m_MethodName: BotonCambioEstado
+        m_MethodName: BotonCambioEstadoLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3227,5 +3226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f090c14d4933fe14f87103eadfe459b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usuario: {fileID: 0}
-  contrasenia: {fileID: 0}
+  usuario: {fileID: 277186663}
+  contrasenia: {fileID: 811268038}
+  MsgBox: {fileID: 0}

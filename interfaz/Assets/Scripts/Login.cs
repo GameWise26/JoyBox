@@ -15,19 +15,21 @@ class Nombre{
 }
 public class Login : MonoBehaviour
 {
-    public TextMeshProUGUI usuario, contrasenia, MsgBoxError;
+    public TMP_InputField usuario, contrasenia;
+    public TextMeshProUGUI MsgBox;
     // Start is called before the first frame update
     void Start()
     {
         SocketManager.instancia.socket.OnUnityThread("login", (response) =>
         {
-            string rest = response.ToString();
-            Dictionary<string,string> res = JsonConvert.DeserializeObject<Dictionary<string,string>>(rest.Substring(1,rest.Length-2));
-            if(res.ContainsKey("nombre")){
-                SocketManager.instancia.nombre = res["nombre"];
+            List<string> res = SocketManager.instancia.pasarLista(response);
+            //string rest = response.ToString();
+            //Dictionary<string,string> res = JsonConvert.DeserializeObject<Dictionary<string,string>>(rest.Substring(1,rest.Length-2));
+            if(res[1] == "1"){
+                SocketManager.instancia.nombre = res[0];
                 SceneManager.LoadScene("interfaz_home");
             }
-            else if(res["exito"] == "EnUso"){
+            /*else if(res["exito"] == "EnUso"){
                 MsgBoxError.text = "La cuenta a la que intentas acceder ya se encuentra en uso actualmente";
             }
             else if(res["exito"] == "CI"){
@@ -35,7 +37,7 @@ public class Login : MonoBehaviour
             }
             else if(res["exito"] == "IX"){
                 MsgBoxError.text = "Error inesperado. Vuelva a intentarlo mas tarde";
-            }
+            }*/
         });
         SocketManager.instancia.socket.OnUnityThread("camigos", (response) =>{
             string rest = response.ToString();

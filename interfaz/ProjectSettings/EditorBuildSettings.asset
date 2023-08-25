@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Interfaz_juegos.unity
     guid: 0cbb1429773683b43b5457217b53797f
   - enabled: 1
+    path: "Assets/Scenes/Interfaz_a\xF1adir.unity"
+    guid: 2a185867c0a1a0c4fa708371b3f8cc5c
+  - enabled: 1
     path: Assets/Scenes/Interfaz_social.unity
     guid: be015b248a8c08642afdc41e7cc59852
   - enabled: 1

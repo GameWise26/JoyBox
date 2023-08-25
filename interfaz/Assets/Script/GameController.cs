@@ -39,11 +39,11 @@ public class GameController : MonoBehaviour
     void Start()
     {
         if(SocketManager.instancia.juego != "flappy"){
-            SocketManager.instancia.socket.OnUnityThread("fPuntos", (response) =>{
+            /*SocketManager.instancia.socket.OnUnityThread("fPuntos", (response) =>{
                 int pts = int.Parse(SocketManager.instancia.pasarDict(response)["puntos"]);
                 recordText.text = "Record: " + pts;
                 SocketManager.instancia.flappyPuntos = pts;
-            });
+            });*/
             Juego juego = new Juego{
                 juego = "flappy"
             };

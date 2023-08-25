@@ -10,7 +10,7 @@
       "hash": "c9e06b15391449ad42fd9b0f39fea48054751bcd"
     },
     "com.unity.2d.animation": {
-      "version": "9.0.3",
+      "version": "9.0.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -138,7 +138,7 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.2d.animation": "9.0.3",
+        "com.unity.2d.animation": "9.0.2",
         "com.unity.2d.pixel-perfect": "5.0.3",
         "com.unity.2d.psdimporter": "8.0.2",
         "com.unity.2d.sprite": "1.0.0",

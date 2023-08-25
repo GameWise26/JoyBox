@@ -23,6 +23,12 @@ public class NewBehaviourScript : MonoBehaviour
         CambiarImagenBoton();
     }
 
+    public void BotonCambioEstadoLogin(){
+        showPassword = !showPassword;
+        CambiarVisibilidad(contraseniaInputField);
+        CambiarImagenBoton();
+    }
+
     private void CambiarVisibilidad(TMP_InputField inputField)
     {
         inputField.contentType = showPassword ? TMP_InputField.ContentType.Standard : TMP_InputField.ContentType.Password;
