@@ -918,6 +918,7 @@ MonoBehaviour:
   espacioHorizontal: 4
   espacioVertical: 7
   separacionEntreGrupos: 0
+  cartasGameObject: []
 --- !u!4 &277549661
 Transform:
   m_ObjectHideFlags: 0
@@ -1982,7 +1983,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 579249446}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1880594523}
+        m_TargetAssemblyTypeName: Juego, Assembly-CSharp
+        m_MethodName: CantarFaltaEnvido
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &579249446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2226,7 +2239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091539275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2743,7 +2756,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1254081125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1880594523}
+        m_TargetAssemblyTypeName: Juego, Assembly-CSharp
+        m_MethodName: CantarTrucos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1254081125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3332,7 +3357,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1608142076}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1880594523}
+        m_TargetAssemblyTypeName: Juego, Assembly-CSharp
+        m_MethodName: CantarRealEnvido
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1608142076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4005,6 +4042,7 @@ MonoBehaviour:
   canvascantos: {fileID: 1880594518}
   menunormal: {fileID: 300061740}
   menuenvidos: {fileID: 1091539274}
+  textotruco: {fileID: 225964866}
 --- !u!1 &2018128960
 GameObject:
   m_ObjectHideFlags: 0

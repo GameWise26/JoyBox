@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class Juego : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class Juego : MonoBehaviour
     private int puntosJugador2 = 0;
     private List<Carta> manoJugador1 = new List<Carta>(); 
     private List<Carta> manoJugador2 = new List<Carta>();
+    public TMPro.TextMeshProUGUI textotruco;
  
 
     void Start()
@@ -105,43 +108,46 @@ public class Juego : MonoBehaviour
         }
     }
 
-    // Lógica para calcular los puntos del Envido
-    private int CalcularPuntosEnvido(List<Carta> manoDelJugador)
-    {
-        int puntosEnvido = 0;
+private int CalcularPuntosEnvido(List<Carta> manoDelJugador)
+{
+    int puntosEnvido = 0;
+    Dictionary<Palo, List<Valor>> palosYValores = new Dictionary<Palo, List<Valor>>();
 
-        // Implementa aquí la lógica para calcular los puntos del Envido según las reglas que proporcionaste
-        return puntosEnvido;
+    foreach (Palo palo in Enum.GetValues(typeof(Palo)))
+    {
+        palosYValores[palo] = new List<Valor>();
     }
 
-    private int CalcularPuntosEnvidoEnvido(List<Carta> manoDelJugador)
+    foreach (Carta carta in manoDelJugador)
     {
-        int puntosEnvidoEnvido = 0;
-
-        // Implementa aquí la lógica para calcular los puntos del Envido Envido según las reglas que proporcionaste
-
-        return puntosEnvidoEnvido; 
+        palosYValores[carta.palo].Add(carta.valor);
     }
 
-    private int CalcularPuntosRealEnvido(List<Carta> manoDelJugador)
+    int maxPuntaje = 0;
+    foreach (KeyValuePair<Palo, List<Valor>> kvp in palosYValores)
     {
-        int puntosRealEnvido = 0;
+        int puntajePalo = 0;
 
-        // Implementa aquí la lógica para calcular los puntos del Real Envido según las reglas que proporcionaste
+        foreach (Valor valor in kvp.Value)
+        {
+            int valorNumerico = (int)valor;
+            //condición ? valor_si_verdadero : valor_si_falso;
+            valorNumerico = (valorNumerico >= 10 && valorNumerico <= 12) ? 0 : valorNumerico;
+            puntajePalo += valorNumerico;
+        }
 
-        return puntosRealEnvido; 
+        maxPuntaje = Mathf.Max(maxPuntaje, puntajePalo);
     }
 
-    private int CalcularPuntosFaltaEnvido(List<Carta> manoDelJugador)
-    {
-        int puntosFaltaEnvido = 0;
-        return puntosFaltaEnvido; 
-    }
+    puntosEnvido = maxPuntaje + 20;
 
-   public void VolverARepartir()
-    {
-    
-    // Resetea las variables de canto (si es necesario)
+    return puntosEnvido;
+}
+
+
+
+public void VolverARepartir()
+{
     Envido = false;
     EnvidoEnvido = false;
     RealEnvido = false;
@@ -149,14 +155,39 @@ public class Juego : MonoBehaviour
     Truco = false;
     Retruco = false;
     Vale4 = false;
-        
-    // Limpiar las manos de ambos jugadores
+    textotruco.text = "Truco";
+
     manoJugador1.Clear();
     manoJugador2.Clear();
-    
-    // Volver a repartir las cartas
-    
-    GameManager.Instance.RealizarInicio();
-    }   
 
+    GameManager.Instance.DestruirCartasAnteriores();
+
+    GameManager.Instance.RealizarInicio();
+}
+
+
+//////////////////////////////TRUCO//////////////////////////////
+public void CantarTrucos()
+{
+    if (!Truco)
+    {
+            Truco = true;
+            Debug.Log("TRUCO");
+            textotruco.text = "Re Truco";
+    }
+    else if(Truco && !Retruco)
+    {
+            Truco = true;
+            Retruco = true;
+            Debug.Log("Re truco");
+            textotruco.text = "Vale 4";
+    }
+    else if(Retruco && Truco)
+    {
+            Truco = true;
+            Retruco = true;
+            Vale4 = true;
+            Debug.Log("Quiero Vale 4");
+    }
+}
 }

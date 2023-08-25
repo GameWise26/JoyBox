@@ -116,7 +116,8 @@ public class GameManager : MonoBehaviour
         cartasGameObject.Clear();
     }
 
-   public void GenerarYBarajarCartas()
+
+public void GenerarYBarajarCartas()
 {
     // Limpiar listas y diccionario antes de generar nuevas cartas
     cartasGameObject.Clear();
