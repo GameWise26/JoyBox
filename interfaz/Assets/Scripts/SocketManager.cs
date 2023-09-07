@@ -22,7 +22,7 @@ public class SocketManager : MonoBehaviour
     public string nombre;
     public List<string> amigos = new List<string>(){};
     public string juego;
-    public bool salirJuego;
+    public bool salirJuego,banInicio = false;
     public int flappyPuntos;
     public string id_espec;
 
@@ -100,6 +100,9 @@ public class SocketManager : MonoBehaviour
                     break;
                 }
             }
+        });
+        SocketManager.instancia.socket.OnUnityThread("inicio", (response) =>{
+            banInicio = true;
         });
     }
     public void Emit(string evento,object valor){

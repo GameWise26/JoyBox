@@ -1,26 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 
-class Iniciar{
-    public string nombre { get; set; }
-    public string contrasenia{get;set;}
-}
-class Nombre{
-    public string nombre { get; set; }
-}
-public class Login : MonoBehaviour
+
+public class GameController_PantallaCarga : MonoBehaviour
 {
-    public TMP_InputField usuario, contrasenia;
-    public TextMeshProUGUI MsgBox;
-    public bool si = false;
-    public Sprite check,uncheck;
-    public GameObject checkbox;
-    private string nombre,contra;
+    private bool banSaveSession = false, dou = true, dou1 = true, llave1 = false, llave2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +18,7 @@ public class Login : MonoBehaviour
             //Dictionary<string,string> res = JsonConvert.DeserializeObject<Dictionary<string,string>>(rest.Substring(1,rest.Length-2));
             if(res[1] == "1"){
                 SocketManager.instancia.nombre = res[0];
-                if(si){
-                    PlayerPrefs.SetString("nombre", nombre);
-                    PlayerPrefs.SetString("contraseña", contra);
-                    PlayerPrefs.Save();
-                }
-                SceneManager.LoadScene("interfaz_home");
+                llave1 = true;
             }
             /*else if(res["exito"] == "EnUso"){
                 MsgBoxError.text = "La cuenta a la que intentas acceder ya se encuentra en uso actualmente";
@@ -51,16 +33,28 @@ public class Login : MonoBehaviour
         SocketManager.instancia.socket.OnUnityThread("camigos", (response) =>{
             string rest = response.ToString();
             SocketManager.instancia.amigos = JsonConvert.DeserializeObject<List<string>>(rest.Substring(1,rest.Length-2));
+            llave2 = true;
         });
-    }
-    public void Enviar(){
-        nombre = usuario.text;
-        contra = contrasenia.text;
-        SocketManager.instancia.socket.Emit("login",new {datos = new string[]{usuario.text,contrasenia.text}});
+        if(PlayerPrefs.HasKey("nombre") && PlayerPrefs.HasKey("contraseña") && PlayerPrefs.GetString("nombre") != "" && PlayerPrefs.GetString("contraseña") != ""){
+            banSaveSession = true;
+        }
     }
 
-    public void Check_Button(){
-        si = !si;
-        checkbox.GetComponent<Image>().sprite = si ? uncheck:uncheck;
+    // Update is called once per frame
+    void Update()
+    {
+        if(!banSaveSession && SocketManager.instancia.banInicio && dou)
+        {
+            dou = false;
+            SceneManager.LoadScene("interfaz_inicio_sesion");
+        }
+        else if(banSaveSession && SocketManager.instancia.banInicio && dou1){
+            dou1 = false;
+            SocketManager.instancia.socket.Emit("login",new {datos = new string[]{PlayerPrefs.GetString("nombre"),PlayerPrefs.GetString("contraseña")}});
+        }
+        if(SocketManager.instancia.banInicio && dou && llave1 && llave2){
+            dou = false;
+            SceneManager.LoadScene("interfaz_home");
+        }
     }
 }
