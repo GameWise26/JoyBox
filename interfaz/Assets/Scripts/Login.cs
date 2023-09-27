@@ -52,11 +52,19 @@ public class Login : MonoBehaviour
             string rest = response.ToString();
             SocketManager.instancia.amigos = JsonConvert.DeserializeObject<List<string>>(rest.Substring(1,rest.Length-2));
         });
+        SocketManager.instancia.socket.OnUnityThread("miImagen", (response) =>{
+            List<string> res = SocketManager.instancia.pasarLista(response);
+            byte[] imagenBytes = System.Convert.FromBase64String(res[0]);
+            Texture2D texture = new Texture2D(1, 1);
+            texture.LoadImage(imagenBytes);
+            SocketManager.instancia.fdp = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+        });
     }
     public void Enviar(){
         nombre = usuario.text;
         contra = contrasenia.text;
         SocketManager.instancia.socket.Emit("login",new {datos = new string[]{usuario.text,contrasenia.text}});
+        SocketManager.instancia.socket.Emit("pedirImagen",new {datos = new string[]{}});
     }
 
     public void Check_Button(){

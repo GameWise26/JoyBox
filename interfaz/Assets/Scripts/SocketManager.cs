@@ -20,6 +20,7 @@ public class SocketManager : MonoBehaviour
 
     //Datos del usuario
     public string nombre;
+    public Sprite fdp;
     public List<string> amigos = new List<string>(){};
     public string juego;
     public bool salirJuego,banInicio = false;
@@ -103,6 +104,22 @@ public class SocketManager : MonoBehaviour
         });
         SocketManager.instancia.socket.OnUnityThread("inicio", (response) =>{
             banInicio = true;
+        });
+        SocketManager.instancia.socket.OnUnityThread("enLinea", (response) =>{
+            List<string> res = SocketManager.instancia.pasarLista(response);
+            for(var i = 0; i < amigos.Count;i+=5){
+                if(amigos[i] == res[0]){
+                    amigos[i+4] = "s";
+                }
+            }
+        });
+        SocketManager.instancia.socket.OnUnityThread("enLineaNo", (response) =>{
+            List<string> res = SocketManager.instancia.pasarLista(response);
+            for(var i = 0; i < amigos.Count;i+=5){
+                if(amigos[i] == res[0]){
+                    amigos[i+4] = "n";
+                }
+            }
         });
     }
     public void Emit(string evento,object valor){
