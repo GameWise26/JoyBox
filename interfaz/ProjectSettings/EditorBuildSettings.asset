@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Interfaz_inicio_sesion.unity
     guid: 85ced61bc5e7fb84c96ce6cb9cbbc6ed
   - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
+    path: Assets/Scenes/Nivel 01.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Interfaz_home.unity
@@ -74,6 +74,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Interfaz_configuraciones_seguridad.unity
     guid: 3becb67eec97b5e49b83f438b23e635f
+  - enabled: 1
+    path: Assets/Scenes/FinalBuenoScene.unity
+    guid: 8f7593408f05c8641b63ee0b6761fb25
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
+    guid: bcff4343c1a181349908095ee3aa703d
   - enabled: 1
     path: Assets/Scenes/Interfaz_configuraciones_privacidad.unity
     guid: 27e5d402cceb51b4bb20c4a3df51ddf5
