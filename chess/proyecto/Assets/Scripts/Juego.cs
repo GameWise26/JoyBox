@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Juego : MonoBehaviour
 {
     public GameObject pieza;
+    public GameObject muteButton;
 
     // Creo arrays de cada jugador (solo para entendidos) y un array con todas las posiciones posibles
     private GameObject[,] posiciones = new GameObject[8, 8];
@@ -17,6 +18,7 @@ public class Juego : MonoBehaviour
 
     private string jugadorActivo = "Blanco";
     private bool gameOver = false;
+    private bool mute = false;
 
 
     public GameObject Crear(string nombre, int x, int y) {
@@ -133,5 +135,14 @@ public class Juego : MonoBehaviour
 
     public bool PosicionEnTablero(int x, int y) {
         return (x < 0 || y < 0 || x >= posiciones.GetLength(0) || y >= posiciones.GetLength(1)) ? false : true;
+    }
+
+    public bool GetMute() { 
+        return mute;
+    }
+
+    public void SwitchMute()
+    {
+        mute = !mute;
     }
 }

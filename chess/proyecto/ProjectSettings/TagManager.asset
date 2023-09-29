@@ -8,6 +8,7 @@ TagManager:
   - TextoReset
   - TextoGanador
   - TextoJActivo
+  - Mute
   layers:
   - Default
   - TransparentFX

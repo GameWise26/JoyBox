@@ -7,6 +7,8 @@ public class chicoAjedrez : MonoBehaviour
     // Referencias
     public GameObject controlador;
     public GameObject movePlate;
+    public AudioSource SonidoMovimiento;
+    public AudioSource SonidoCaptura;
 
     // Posiciones
     private int cordX = -1;
@@ -225,6 +227,15 @@ public class chicoAjedrez : MonoBehaviour
         mpScript.ataque = ataque == true ? true : false;
         mpScript.SetReferencia(gameObject);
         mpScript.SetCords(matrizX, matrizY);
+    }
+
+    public void MoveSound() {
+        SonidoMovimiento.Play();
+    }
+
+    public void CaptureSound()
+    {
+        SonidoCaptura.Play();
     }
 
     public int GetCordX() {

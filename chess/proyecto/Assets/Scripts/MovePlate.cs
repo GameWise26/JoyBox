@@ -28,10 +28,12 @@ public class MovePlate : MonoBehaviour
     {
         controlador = GameObject.FindGameObjectWithTag("GameController");
 
-        if (ataque) { 
+        if (ataque)
+        {
             GameObject piezaDestruida = controlador.GetComponent<Juego>().GetPos(matrizX, matrizY);
 
-            if (piezaDestruida.name == "B_rey") {
+            if (piezaDestruida.name == "B_rey")
+            {
                 controlador.GetComponent<Juego>().Ganador("Negras");
             }
             if (piezaDestruida.name == "N_rey")
@@ -39,7 +41,15 @@ public class MovePlate : MonoBehaviour
                 controlador.GetComponent<Juego>().Ganador("Blancas");
             }
 
+            if (!controlador.GetComponent<Juego>().GetMute()) {
+                referencia.GetComponent<chicoAjedrez>().CaptureSound();
+            }
             Destroy(piezaDestruida);
+        }
+        else {
+            if (!controlador.GetComponent<Juego>().GetMute()) {
+                referencia.GetComponent<chicoAjedrez>().MoveSound();
+            }
         }
 
         controlador.GetComponent<Juego>().SetPosVacio(referencia.GetComponent<chicoAjedrez>().GetCordX(), referencia.GetComponent<chicoAjedrez>().GetCordY());
