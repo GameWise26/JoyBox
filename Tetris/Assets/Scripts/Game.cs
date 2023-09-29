@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.UIElements;
 
 public class Game : MonoBehaviour
 {
@@ -14,15 +15,39 @@ public class Game : MonoBehaviour
     private List<string> listTetrominos = new List< string>();
     public List<SpriteRenderer> NextPanel = new List<SpriteRenderer>();
     public List<Sprite> spritesTetrominos= new List<Sprite>();
+    public Tetromino currentHeldTetromino, piezaRecienTomada = null;
+    public bool piezaRTomada = false;
+    public bool piezaEnHold = false;
+    public SpriteRenderer holdPanel;
+    public bool holdEnable = true;
+    public bool afterHold = false;
+    public bool seCambiaPorHold = false;
+    public bool llegoAlFinal = false;
+    public int currentScore = 0;
+    public TextMeshProUGUI puntosMostrar;
+    public bool pausa = false;
+    public GameObject panel;
+    //public Button pausa;
+
 
     void Start()
     {
         FillTetrominoBag();
         SpawnNextTetromino();
+        afterHold = false;
+        Debug.Log("Start: CT = " + currentHeldTetromino == null ? "null" : "tiene un valor");
     }
 
     void Update()
     {
+        puntosMostrar.text = "Puntos: " + currentScore;
+        Debug.Log("en pausa:" + pausa);
+    }
+
+    public void pausaBtn()
+    {
+        pausa = !pausa;
+        panel.transform.position += new Vector3( pausa ? 1920.0f : -1920.0f, 0.0f, 0.0f);
     }
 
     void FillTetrominoBag()
@@ -60,6 +85,7 @@ public class Game : MonoBehaviour
         }
     }
 
+
     public void MoveRowDown(int y)
     {
         for (int x = 0; x < gridWidth; ++x)
@@ -88,6 +114,7 @@ public class Game : MonoBehaviour
             if (IsFullRowAt(y))
             {
                 DeleteMinoAt(y);
+                currentScore += 100;
                 MoveAllRowsDown(y + 1);
                 --y;
             }
@@ -133,17 +160,11 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void SpawnNextTetromino()
-    {
-        GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(ListTetrominos()[0], typeof(GameObject)), new Vector2(5.0f,18.0f), Quaternion.identity);
-
-    }
-
     public List<string> ListTetrominos()
     {
         
         if (listTetrominos.Count == 0) {
-            Debug.Log("Llenando lista");
+            //Debug.Log("Llenando lista");
             for (int i = 0; i < 6; i++)
             {
                 listTetrominos.Add(GetNextTetromino());
@@ -151,7 +172,7 @@ public class Game : MonoBehaviour
         }
         else
         {
-            Debug.Log("Remover agregar");
+            //Debug.Log("Remover agregar");
             listTetrominos.RemoveAt(0);
             listTetrominos.Add(GetNextTetromino());
         }
@@ -162,6 +183,35 @@ public class Game : MonoBehaviour
         }
 
         return listTetrominos;
+    }
+
+    public void SpawnNextTetromino()
+    {
+        if (!llegoAlFinal)
+        {
+            string nextTetrominoPath = seCambiaPorHold ? currentHeldTetromino.prefabPath : ListTetrominos()[0];
+            GameObject nextTetromino = (GameObject)Instantiate(Resources.Load(nextTetrominoPath, typeof(GameObject)), new Vector2(5.0f, 19.0f), Quaternion.identity);
+            nextTetromino.GetComponent<Tetromino>().prefabPath = nextTetrominoPath;
+        }
+    }
+
+    public void HoldPanel()
+    {
+        if (!llegoAlFinal)
+        {
+            if (piezaRTomada)
+            {
+                currentHeldTetromino = piezaRecienTomada;
+            }
+            string prefabPath = currentHeldTetromino.prefabPath;
+            UpdateHoldPanel(prefabPath);
+
+        }
+    }
+
+    void UpdateHoldPanel(string tetrominoPath)
+    {
+        holdPanel.sprite = spritesTetrominos.FirstOrDefault(s => s.name[s.name.Length - 1] == tetrominoPath[tetrominoPath.Length - 1]);
     }
 
     public bool CheckIsInsideGrid(Vector2 position)
@@ -183,5 +233,6 @@ public class Game : MonoBehaviour
 
         return "Prefabs/" + tetrominoBag.Dequeue();
     }
+
 
 }

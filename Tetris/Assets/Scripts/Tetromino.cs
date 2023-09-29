@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
+
 
 public class Tetromino : MonoBehaviour
 {
@@ -10,17 +12,32 @@ public class Tetromino : MonoBehaviour
     public bool limitRotation = false;
     public bool rectangulo = false;
     private bool rote;
-
+    public string prefabPath;
+    public Tetromino currentTetromino ;
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckUserInput();
+        if (!FindObjectOfType<Game>().pausa)
+        {
+            if (FindObjectOfType<Game>().afterHold)
+            {
+                if (HasTouchedGround() == true)
+                {
+                    FindObjectOfType<Game>().afterHold = false;
+                    FindObjectOfType<Game>().holdEnable = true;
+                }
+                else
+                {
+                    FindObjectOfType<Game>().holdEnable = false;
+                }
+            }
+            CheckUserInput();
+        }
     }
 
     void CheckUserInput()
@@ -51,10 +68,36 @@ public class Tetromino : MonoBehaviour
             Move(Vector3.down);
             fall = Time.time;
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (FindObjectOfType<Game>().holdEnable)
+            {
+                currentTetromino = FindObjectOfType<Tetromino>();
+
+                if (FindObjectOfType<Game>().piezaEnHold == false)
+                {
+                    FindObjectOfType<Game>().currentHeldTetromino = currentTetromino;
+                    FindObjectOfType<Game>().piezaEnHold = true;
+                    FindObjectOfType<Game>().seCambiaPorHold = false;
+                }
+                else
+                {
+                    FindObjectOfType<Game>().seCambiaPorHold = true;
+                    FindObjectOfType<Game>().piezaRTomada = true;
+                   FindObjectOfType<Game>().piezaRecienTomada = currentTetromino;
+                }               
+                    FindObjectOfType<Game>().holdEnable = false;
+                    FindObjectOfType<Game>().afterHold = true;
+                    Destroy(currentTetromino.gameObject);
+                    FindObjectOfType<Game>().SpawnNextTetromino();
+                    FindObjectOfType<Game>().HoldPanel();
+            }
+        }
     }
 
     void Move(Vector3 direction)
     {
+        Vector3 currentPosition = transform.position;
         transform.position += direction + (rectangulo && transform.position.x == 0 && rote == true ? direction : Vector3.zero);
 
         if (CheckIsValidPosition())
@@ -68,7 +111,9 @@ public class Tetromino : MonoBehaviour
 
             if (direction == Vector3.down)
             {
-                Debug.Log("Toco suelo");
+
+                FindObjectOfType<Game>().llegoAlFinal = currentPosition.y >= 19 ? true : false;
+
                 for (int yMino = 0; yMino < 20; yMino++)
                 {
                     if (FindObjectOfType<Game>().IsFullRowAt(yMino))
@@ -77,18 +122,38 @@ public class Tetromino : MonoBehaviour
                     }
                 }
 
-                enabled = false; 
+                enabled = false;
+                FindObjectOfType<Game>().afterHold = false;
+                FindObjectOfType<Game>().seCambiaPorHold = false;
                 FindObjectOfType<Game>().SpawnNextTetromino();
             }
         }
     }
+
+    bool HasTouchedGround()
+    {
+        Vector3 currentPosition = transform.position;
+
+        transform.position += Vector3.down;
+        if (CheckIsValidPosition())
+        {
+            transform.position = currentPosition;
+            return false;
+        }
+        else
+        {
+            transform.position = currentPosition;
+            return true;
+        }
+    }
+
 
     void Rotate()
     {
         if (!allowRotation)
             return;
 
-        int rotationAngle = !limitRotation || (int)transform.eulerAngles.z == 90 ? -90 : 90; 
+        int rotationAngle = !limitRotation || (int)transform.eulerAngles.z == 90 ? -90 : 90;
 
         transform.Rotate(0, 0, rotationAngle);
 
