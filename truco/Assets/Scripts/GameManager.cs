@@ -39,7 +39,11 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
     public GameObject cartaPrefab;
     public List<Carta> cartas;
     public Transform[] objetosDestino;
-
+    private bool turnoJugador1 = true;
+    public bool TurnoJugador1
+    {
+        get { return turnoJugador1; }
+    }
     public float espacioHorizontal = 2.0f;
     public float espacioVertical = 2.0f;
     public float separacionEntreGrupos = 1.0f;
@@ -122,7 +126,7 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
         cartasGameObject.Clear();
     }
 
-    public void GenerarYBarajarCartas()
+   public void GenerarYBarajarCartas()
     {
         // Limpiar listas y diccionario antes de generar nuevas cartas
         cartasGameObject.Clear();
@@ -141,28 +145,21 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
             GameObject nuevaCarta = Instantiate(cartaPrefab, objetosDestino[i].position, objetosDestino[i].rotation); // Posición y rotación del objeto destino
             SpriteRenderer spriteRenderer = nuevaCarta.GetComponent<SpriteRenderer>();
 
-            if (i < 3)
-            {
-                // Escala diferente para las primeras tres cartas (0, 1, 2)
-                nuevaCarta.transform.localScale = new Vector3(0.742592f, 0.8768119f, 1f);
-                nuevaCarta.name = "Carta " + i;
-            }
-            else
-            {
-                nuevaCarta.transform.localScale = new Vector3(1.64f, 1.66f, 1f);
-                spriteRenderer.sprite = cartas[i].sprite;
+            // Establecer la misma escala para todas las cartas
+            nuevaCarta.transform.localScale = new Vector3(1.64f, 1.66f, 1f);
 
-                // Agregar o ajustar el único BoxCollider2D
-                BoxCollider2D boxCollider = nuevaCarta.GetComponent<BoxCollider2D>();
-                if (boxCollider == null)
-                {
-                    boxCollider = nuevaCarta.AddComponent<BoxCollider2D>();
-                }
+            spriteRenderer.sprite = cartas[i].sprite;
 
-                // Establecer offset y tamaño específicos
-                boxCollider.offset = new Vector2(0.007541239f, 0.01489973f);
-                boxCollider.size = new Vector2(2.033966f, 3.258996f);
+            // Agregar o ajustar el único BoxCollider2D
+            BoxCollider2D boxCollider = nuevaCarta.GetComponent<BoxCollider2D>();
+            if (boxCollider == null)
+            {
+                boxCollider = nuevaCarta.AddComponent<BoxCollider2D>();
             }
+
+            // Establecer offset y tamaño específicos
+            boxCollider.offset = new Vector2(0.007541239f, 0.01489973f);
+            boxCollider.size = new Vector2(2.033966f, 3.258996f);
 
             cartasGameObject.Add(nuevaCarta);
 
@@ -171,8 +168,17 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
             {
                 cartaSpriteDict.Add(cartas[i], spriteRenderer.sprite);
             }
+
+            // Si es una de las cartas 1, 2 o 3, agregar el componente CartaBehavior para hacerlas clicables
+            if (i < 3)
+            {
+                nuevaCarta.AddComponent<CartaBehavior>();
+            }
         }
     }
+
+
+
 
      void RepartirCartas()
     {
@@ -204,10 +210,7 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
         }
     }
 
-    public void MoveCardToDestination(CartaBehavior cardBehavior, Vector3 destination)
-    {
-        StartCoroutine(MoveCardToDestinationCoroutine(cardBehavior, destination));
-    }
+
 
     public IEnumerator<Carta> GetEnumerator()
     {
@@ -243,7 +246,6 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
     void Update()
     {
         bool allCardsArrived = true;
-
         foreach (var carta in cartasGameObject)
         {
             if (carta != null && carta.GetComponent<CartaBehavior>() != null && carta.GetComponent<CartaBehavior>().IsMoving)
@@ -251,6 +253,10 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
                 allCardsArrived = false;
                 break;
             }
+        }
+        if (allCardsArrived)
+        {
+            CambiarTurno();
         }
     }
 
@@ -272,4 +278,25 @@ public class GameManager : MonoBehaviour, IEnumerable<Carta>
     {
         cardBehavior.IsMoving = true;
     }
+
+public void CambiarTurno()
+{
+    turnoJugador1 = !turnoJugador1; // Cambiar el turno al otro jugador
+    allCardsArrived = false; // Restablecer la bandera para permitir que el siguiente jugador mueva cartas
+}
+
+private int cartasMovidasEnRonda = 0;
+public Juego juegoScript;
+public void CardMoved()
+{
+    cartasMovidasEnRonda++;
+    // Verificar si todas las cartas han sido movidas en esta ronda
+    if (cartasMovidasEnRonda >= 6)
+    {
+        CambiarTurno();
+        Debug.Log("Ronda Terminada");
+        cartasMovidasEnRonda = 0;
+        juegoScript.VolverARepartir();
+    }
+}
 }

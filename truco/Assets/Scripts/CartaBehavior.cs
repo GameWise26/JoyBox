@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CartaBehavior : MonoBehaviour
 {
-    private bool isMoving = false;
+    public bool IsMoving { get; set; } = false;
     private Vector3 originalPosition;
     private bool isRevealed = false;
     private SpriteRenderer spriteRenderer;
@@ -10,12 +10,6 @@ public class CartaBehavior : MonoBehaviour
     public float TargetHeight { get; private set; } = 3.0f; // Altura del destino
 
     private GameManager gameManager;
-
-    public bool IsMoving
-    {
-        get { return isMoving; }
-        set { isMoving = value; }
-    }
 
     private void Start()
     {
@@ -26,7 +20,7 @@ public class CartaBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (IsMoving)
         {
             float step = 5.0f * Time.deltaTime;
             Vector3 targetPosition = originalPosition + Vector3.up * TargetHeight;
@@ -34,17 +28,32 @@ public class CartaBehavior : MonoBehaviour
 
             if (transform.position == targetPosition)
             {
-                isMoving = false;
+                IsMoving = false;
             }
         }
     }
 
     private void OnMouseDown()
+{
+    if (!IsMoving && !isRevealed)
     {
-        if (!IsMoving && !isRevealed)
+        if ((gameManager.TurnoJugador1 && gameManager.GetIndexOfCard(gameObject) >= 3) ||
+            (!gameManager.TurnoJugador1 && gameManager.GetIndexOfCard(gameObject) < 3))
         {
             IsMoving = true;
             gameManager.MoveCardToDestination(this); // Mover hacia el objeto destino
+
+            // Comprueba si la carta es la 1, 2 o 3
+            int indexOfCard = gameManager.GetIndexOfCard(gameObject);
+            if (indexOfCard >= 0 && indexOfCard <= 2)
+            {
+                // Si es la carta 1, 2 o 3, ajusta la altura a un valor negativo para que se mueva hacia atrás
+                TargetHeight = -3.0f;
+            }
+
+            // Marcar la carta como movida en esta ronda
+            gameManager.CardMoved();
         }
     }
+}
 }

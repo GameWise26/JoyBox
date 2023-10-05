@@ -157,10 +157,8 @@ public class Juego : MonoBehaviour
             }
 
             // Implementa la lógica para actualizar marcadores y manejar fin de partida si alguien llega a 30 puntos
-            // ...
 
             // Implementa la lógica para reiniciar estado de los cantos, cambiar de turno y activar el canvas de canto
-            // ...
         }
     }
 
@@ -319,5 +317,6 @@ public class Juego : MonoBehaviour
                 Debug.Log("Quiero Vale 4");
         }
     }
+//////////////////////////////ESTA COSA//////////////////////////////
 
 }
