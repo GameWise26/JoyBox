@@ -77,4 +77,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Interfaz_configuraciones_privacidad.unity
     guid: 27e5d402cceb51b4bb20c4a3df51ddf5
+  - enabled: 1
+    path: Assets/Scenes/Level.unity
+    guid: a2cd57e07e32ccb4497d14cb271cbf4a
+  - enabled: 1
+    path: Assets/Scenes/tetris.unity
+    guid: 5dbdc0f0353b5b24598ab7c14cfb5d5d
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 296bd7c592683594996ea57f55213bcd
   m_configObjects: {}
