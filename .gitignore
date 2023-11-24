@@ -1,5 +1,6 @@
-flappy/proyecto/Library/*
-
+tetris2/Library/*
+/flappy/proyecto/Library/*
+/interfaz/Library/*
+/Tetris/Library/*
 boton/proyecto/Library/*
-
 chess/proyecto/Library/*
